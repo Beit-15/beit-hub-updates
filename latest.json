@@ -1,6 +1,6 @@
 {
-  "version": "2.2.4",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.4.exe",
-  "sha256": "e2aaf856ff6445febf8e5e7f3a6b6ebb7bbc446a539da40e8c67404f1bf0ff9f",
-  "notes": "Beit Sonor e Beit Cam com o visual do ecossistema"
+  "version": "2.2.5",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.5.exe",
+  "sha256": "ec8bef0ed153efc9939a18c95892b48feb6489df71bd0443e63550eebe8ff661",
+  "notes": "Licença de dono e aviso de atualização na tela de login"
 }
