@@ -1,6 +1,6 @@
 {
-  "version": "2.2.0",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.0.exe",
-  "sha256": "14707e6b343e82c8a216c9483b62d956d5f9880caaab02eab35550c10b694673",
-  "notes": "Atualização automática e correções no Beit Hub Motion"
+  "version": "2.2.1",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.1.exe",
+  "sha256": "a3eefd052ac9f3a51b2bf7fd7f137dba975f80fa1a63bf32f691cd5df11ff2ee",
+  "notes": "Teste da atualização automática"
 }
