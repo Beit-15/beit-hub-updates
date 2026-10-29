@@ -1,6 +1,6 @@
 {
-  "version": "2.2.2",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.2.exe",
-  "sha256": "31cd10d9da4aef2e28ffb1a34a449e25c154a499a48a7b3d9161ade736d483d0",
-  "notes": "Motion: transições de fade corrigidas"
+  "version": "2.2.3",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.3.exe",
+  "sha256": "e028d44df4bfab341b13102805097e5c7406fb93ffcbe3adab81c42c02d0de12",
+  "notes": "Botões com animação"
 }
