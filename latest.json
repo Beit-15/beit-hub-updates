@@ -1,6 +1,6 @@
 {
-  "version": "2.2.1",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.1.exe",
-  "sha256": "a3eefd052ac9f3a51b2bf7fd7f137dba975f80fa1a63bf32f691cd5df11ff2ee",
-  "notes": "Teste da atualização automática"
+  "version": "2.2.2",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.2.exe",
+  "sha256": "31cd10d9da4aef2e28ffb1a34a449e25c154a499a48a7b3d9161ade736d483d0",
+  "notes": "Motion: transições de fade corrigidas"
 }
