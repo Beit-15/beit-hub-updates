@@ -139,7 +139,8 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site dialog[open]{animation:bpop .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes bpop{from{opacity:0;transform:translateY(14px) scale(.98)}}
 #beit-site .dlg{background:#fff;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;max-height:calc(100vh - 48px)}
-#beit-site .dlg.noimg{grid-template-columns:1fr}
+#beit-site .dlg.noimg{grid-template-columns:1fr;max-width:560px;margin:0 auto}
+#beit-site .dlg.noimg .dimg{display:none}
 #beit-site .dlg .dimg{background:#f0f0f3;display:flex;align-items:center;justify-content:center;padding:28px;overflow:hidden}
 #beit-site .dlg .dimg img{max-height:520px;width:auto;max-width:100%;border-radius:12px;border:1px solid #d2d2d7}
 #beit-site .dlg .dtxt{padding:40px;overflow:auto;position:relative}
@@ -397,7 +398,7 @@ var T={
 photo:{n:'Beit Hub Photo',h:'Photoshop',img:'photo-1.jpg',i:'O painel que reúne o que um designer usa todo dia no Photoshop, com prévia de cada efeito e tudo editável.',l:['Tratar: 17 tratamentos de Camera Raw sem abrir a janela, entre essenciais, pele, looks e preto e branco','Filtros e finalização: 14 acabamentos para fechar a arte','Cores: 16 vinhetas, 59 gradientes, 16 pontos de luz e 22 paletas','Pattern: 32 texturas de vidro, grão e papel, superfícies e gráficos','Safe zone para Reels, TikTok, Shorts, Story, grade do Instagram e capa do YouTube','Formatos para redes: a mesma arte em feed, stories, quadrado, YouTube, capa de single e mais, num clique','Exportar e ações do dia a dia']},
 motion:{n:'Beit Hub Motion',h:'After Effects',img:'motion-panel.jpg',i:'Animações prontas e ferramentas do dia a dia no After Effects, tudo editável depois de aplicar.',l:['Mais de 200 animações de texto, camada e transição, com miniatura animada de cada uma','Efeitos contínuos como brilho, luz e piscar de cor, para camada e texto','Aba Editar: ajuste intensidade, repetições e cores depois de aplicar','Biblioteca em pastas, com busca e favoritos','Animação Express (beta) e ferramentas do dia a dia']},
 cut:{n:'Beit Hub Cut',h:'Premiere Pro',img:'cut-panel.jpg',i:'O trabalho repetitivo do Premiere feito em segundos.',l:['Corte de silêncio automático','Voz nivelada no vídeo inteiro','Estúdio de legendas: transcrição no seu PC, 18 estilos, qualquer fonte do pack, cor, contorno e fundo, com prévia','Reenquadrar para 9:16, 1:1 e 16:9 seguindo o rosto','Biblioteca de transições, títulos, looks e sons','Capa e quadros do vídeo em PNG e zoom lento']},
-colors:{n:'Beit Hub Colors',h:'Photoshop',i:'Tudo o que envolve cor, num painel ao lado da arte.',l:['Roda de cores com harmonias','Paleta e gradiente tirados da própria imagem','Teste de contraste e simulação de daltonismo','Amostras direto no Photoshop e exportação .ase']},
+colors:{n:'Beit Hub Colors',h:'Photoshop',img:'colors-1.jpg',i:'Tudo o que envolve cor, num painel ao lado da arte.',l:['Roda de cores com harmonias','Paleta e gradiente tirados da própria imagem','Teste de contraste e simulação de daltonismo','Amostras direto no Photoshop e exportação .ase']},
 pedido:{n:'Beit Hub Pedido',h:'Photoshop',i:'A ponte entre o Beit Work e o Photoshop.',l:['Briefing e checklist do pedido ao lado da arte','Cronômetro que conta o tempo de cada pedido','Documento aberto no tamanho certo','A agenda do artista vira texto na arte em um clique','O que você edita volta para o Work']},
 sonor:{n:'Beit Sonor',h:'OBS e programas de áudio · VST3',i:'A sua voz tratada como em estúdio, num plugin só.',l:['EQ, compressor, de-esser, limitador e reverb na ordem certa','Presets prontos para voz','Funciona no OBS e nos programas de áudio que aceitam VST3']},
 cam:{n:'Beit Cam',h:'OBS Studio',i:'A imagem da sua câmera ajustada sem trocar de janela.',l:['Luz, cor e curvas','Ajuste de pele','LUTs','Tudo num painel só dentro do OBS']},
@@ -410,7 +411,7 @@ finance:{n:'Beit Finance',h:'App · financeiro',img:'app-finance.jpg',i:'O finan
 var d=document.getElementById('beit-dlg');if(!d)return;var box=d.querySelector('.dlg'),im=d.querySelector('.dimg img');
 function open(k){var t=T[k];if(!t)return;d.querySelector('.dhost').textContent=t.h;d.querySelector('h3').textContent=t.n;d.querySelector('.dintro').textContent=t.i;
 var ul=d.querySelector('ul');ul.innerHTML='';t.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});
-if(t.img){im.src=S+t.img;im.alt=t.n;box.classList.remove('noimg')}else{box.classList.add('noimg')}
+if(t.img){im.src=S+t.img;im.alt=t.n;box.classList.remove('noimg')}else{im.removeAttribute('src');box.classList.add('noimg')}
 if(d.showModal)d.showModal();else d.setAttribute('open','')}
 document.querySelectorAll('#beit-site [data-t]').forEach(function(b){b.addEventListener('click',function(){open(b.dataset.t)})});
 d.querySelector('.x').addEventListener('click',function(){d.close()});
