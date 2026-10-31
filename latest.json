@@ -1,6 +1,6 @@
 {
-  "version": "2.5.0",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.0.exe",
-  "sha256": "972c1a83a3702d4acd35327b469f33d477220d526d6931031b3c00ceb1e146df",
-  "notes": "Fotos e referências nos pedidos do Beit Work (arrastar, colar ou adicionar), abertas no Photoshop pelo Beit Hub Pedido; botão Zerar horas sempre visível; lista das 38 fontes do Beit Fontes dentro do Hub."
+  "version": "2.5.1",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.1.exe",
+  "sha256": "6330e6d711f14e6ad9ac2cb50c22328b26b51961a04c82d68571e8fa434abccf",
+  "notes": "Beit Work: cole a agenda do cliente (em lista ou em blocos) e o Work separa data, evento, igreja, bairro e cidade, com prévia para conferir."
 }
