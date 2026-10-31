@@ -1,6 +1,6 @@
 {
-  "version": "2.2.5",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.2.5.exe",
-  "sha256": "ec8bef0ed153efc9939a18c95892b48feb6489df71bd0443e63550eebe8ff661",
-  "notes": "Licença de dono e aviso de atualização na tela de login"
+  "version": "2.3.0",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.3.0.exe",
+  "sha256": "0d15f5716529e48169308487bec5b23e84d606a027fd79888838a5bd48912079",
+  "notes": "Cut: legendas redesenhadas · Motion: flicker de cor, luz com repetições e pastas organizadas"
 }
