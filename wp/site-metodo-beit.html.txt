@@ -5,6 +5,12 @@
   background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
   margin:0;width:100%;overflow:hidden}
 body:has(#beit-metodo){background:#0b0b0c;margin:0}
+#beit-metodo .light{--bg:#f5f5f7;--card:#ffffff;--line:#e3e3e8;--line2:#d2d2d7;--text:#1d1d1f;--muted:#5f5f66;--dim:#86868b;background:var(--bg);color:var(--text)}
+#beit-metodo .light h2 em{color:#0a5bd3}
+#beit-metodo .light .kicker{color:#0a6cdc}
+#beit-metodo .light .betbox{background:#fff}
+#beit-metodo .light .glyph{color:#0a5bd3}
+#beit-metodo .light .pil{box-shadow:none}
 #beit-metodo *{box-sizing:border-box;margin:0;padding:0}
 #beit-metodo a{color:inherit;text-decoration:none}
 #beit-metodo img{display:block;max-width:100%}
@@ -182,7 +188,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     <div class="marquee rv"><div class="track"><span>Marcus Salles</span><span>Samuel Eleotério</span><span>Renan Lopes</span><span>Leonardo Sale</span><span>Valesca Mayssa</span><span>Kemilly Santos</span><span>Léo Santana</span><span>Rebeka Mariano</span><span>Ingrid Marianno</span><span>Attos 2 Worship</span><span>Get Church</span><span>Luã Freitas</span><span>Marcus Salles</span><span>Samuel Eleotério</span><span>Renan Lopes</span><span>Leonardo Sale</span><span>Valesca Mayssa</span><span>Kemilly Santos</span><span>Léo Santana</span><span>Rebeka Mariano</span><span>Ingrid Marianno</span><span>Attos 2 Worship</span><span>Get Church</span><span>Luã Freitas</span></div></div>
   </section>
 
-  <section class="block" id="metodo"><div class="wrap">
+  <section class="block light" id="metodo"><div class="wrap">
     <div class="kicker rv">Por que um método</div>
     <h2 class="rv">Saber usar o programa <em>não é ser designer.</em></h2>
     <p class="sub rv">Tutorial ensina o botão. O mercado cobra o resto: entender por que uma peça funciona, se organizar como empresa, conversar com cliente e entregar projetos com consistência. O Método Beit junta essas partes na ordem certa.</p>
@@ -193,7 +199,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     </div>
   </div></section>
 
-  <section class="block" id="pilares" style="padding-top:0"><div class="wrap">
+  <section class="block" id="pilares"><div class="wrap">
     <div class="kicker rv">O conteúdo</div>
     <h2 class="rv">Quatro pilares. <em>Uma formação inteira.</em></h2>
     <div class="pilares">
@@ -204,7 +210,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     </div>
   </div></section>
 
-  <section class="block bet" style="padding-top:0"><div class="wrap">
+  <section class="block bet light"><div class="wrap">
     <div class="betbox rv">
       <div class="glyph" aria-hidden="true">ב</div>
       <div>
@@ -215,7 +221,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     </div>
   </div></section>
 
-  <section class="block" id="professor" style="padding-top:0"><div class="wrap feature">
+  <section class="block" id="professor"><div class="wrap feature">
     <div class="photo2 rv"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt="Cazildo Barbosa" loading="lazy"></div>
     <div>
       <div class="kicker rv">Quem ensina</div>
@@ -247,7 +253,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     </div>
   </div></section>
 
-  <section class="block" id="perguntas" style="padding-top:0"><div class="wrap">
+  <section class="block light" id="perguntas"><div class="wrap">
     <div class="kicker rv">Perguntas</div>
     <h2 class="rv">Antes de se inscrever</h2>
     <div class="faq">

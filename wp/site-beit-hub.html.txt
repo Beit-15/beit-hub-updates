@@ -1,66 +1,103 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-#beit-site{--bg:#0b0b0c;--bg2:#111113;--card:#161618;--line:#232326;--line2:#2e2e32;--text:#f5f5f7;--muted:#a1a1a6;--dim:#6e6e73;--blue:#0A84FF;
+body:has(#beit-site){background:#0b0b0c;margin:0}
+#beit-site{--bg:#0b0b0c;--card:#161618;--line:#232326;--line2:#2e2e32;--text:#f5f5f7;--muted:#a1a1a6;--dim:#6e6e73;--blue:#0A84FF;--accent:#cfe3ff;
   background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
   margin:0;width:100%;overflow:hidden}
-body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site *{box-sizing:border-box;margin:0;padding:0}
 #beit-site a{color:inherit;text-decoration:none}
 #beit-site img{display:block;max-width:100%}
-#beit-site .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-#beit-site .nav{position:sticky;top:0;z-index:20;background:rgba(11,11,12,.78);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+#beit-site .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+/* seções claras */
+#beit-site .light{--bg:#f5f5f7;--card:#ffffff;--line:#e3e3e8;--line2:#d2d2d7;--text:#1d1d1f;--muted:#5f5f66;--dim:#86868b;--accent:#0a5bd3;background:var(--bg);color:var(--text)}
+#beit-site .light .kicker{color:#0a6cdc}
+/* nav */
+#beit-site .nav{position:sticky;top:0;z-index:20;background:rgba(11,11,12,.78);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid #232326}
 #beit-site .nav .wrap{display:flex;align-items:center;height:60px;gap:28px}
 #beit-site .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em}
-#beit-site .brand i{width:30px;height:30px;border-radius:8px;background:#151517;border:1px solid var(--line2);display:grid;place-items:center}
+#beit-site .brand i{width:30px;height:30px;border-radius:8px;background:#151517;border:1px solid #2e2e32;display:grid;place-items:center}
 #beit-site .brand img{height:17px}
-#beit-site .links{display:flex;gap:26px;margin-left:auto;font-size:14px;color:var(--muted)}
-#beit-site .links a:hover{color:var(--text)}
-#beit-site .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 22px;border-radius:12px;font-weight:500;font-size:15px;transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s;cursor:pointer}
+#beit-site .links{display:flex;gap:26px;margin-left:auto;font-size:14px;color:#a1a1a6}
+#beit-site .links a:hover{color:#f5f5f7}
+/* botões */
+#beit-site .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 22px;border-radius:12px;font-weight:500;font-size:15px;transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s;cursor:pointer;border:0;font-family:inherit}
 #beit-site .btn:hover{transform:translateY(-1px)}
 #beit-site .btn.primary{background:var(--blue);color:#fff}
 #beit-site .btn.primary:hover{background:#2b95ff}
-#beit-site .btn.ghost{border:1px solid var(--line2);color:var(--text)}
-#beit-site .btn.ghost:hover{border-color:#4a4a50}
+#beit-site .btn.ghost{border:1px solid var(--line2);color:var(--text);background:transparent}
+#beit-site .btn.ghost:hover{border-color:var(--dim)}
 #beit-site .btn.sm{height:36px;padding:0 16px;font-size:13.5px;border-radius:10px}
-#beit-site .btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#beit-site .btn svg,#beit-site .more svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* tipografia */
+#beit-site h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;font-weight:600;letter-spacing:-.035em;max-width:900px;margin:0 auto}
+#beit-site h1 em,#beit-site h2 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--accent)}
+#beit-site h2{font-size:clamp(32px,4.4vw,52px);line-height:1.06;font-weight:600;letter-spacing:-.03em;max-width:780px}
+#beit-site .kicker{font-size:14px;color:var(--blue);font-weight:500;margin-bottom:14px}
+#beit-site .sub{color:var(--muted);font-size:18px;max-width:640px;margin-top:18px}
+#beit-site section.block{padding:110px 0}
+#beit-site .center{text-align:center}
+#beit-site .center h2,#beit-site .center .sub{margin-left:auto;margin-right:auto}
 /* hero */
-#beit-site .hero{position:relative;padding:110px 0 40px;text-align:center}
+#beit-site .hero{position:relative;padding:110px 0 60px;text-align:center}
 #beit-site .hero::before{content:"";position:absolute;left:50%;top:-180px;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(10,132,255,.22),rgba(10,132,255,0));pointer-events:none}
 #beit-site .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);border:1px solid var(--line2);border-radius:20px;padding:6px 14px;margin-bottom:26px}
 #beit-site .eyebrow b{color:var(--blue);font-weight:500}
-#beit-site h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;font-weight:600;letter-spacing:-.035em;max-width:900px;margin:0 auto}
-#beit-site h1 em,#beit-site h2 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:#cfe3ff}
-#beit-site .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:640px;margin:22px auto 0;font-weight:400}
+#beit-site .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:660px;margin:22px auto 0}
 #beit-site .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
 #beit-site .price-note{margin-top:14px;font-size:13.5px;color:var(--dim)}
 #beit-site .shot{position:relative;margin:70px auto 0;max-width:1060px;border-radius:18px;overflow:hidden;border:1px solid var(--line2);background:#161618}
-#beit-site .shot img{width:100%}
-/* seções */
-#beit-site section.block{padding:110px 0}
-#beit-site .kicker{font-size:14px;color:var(--blue);font-weight:500;margin-bottom:14px}
-#beit-site h2{font-size:clamp(32px,4.4vw,52px);line-height:1.06;font-weight:600;letter-spacing:-.03em;max-width:760px}
-#beit-site .sub{color:var(--muted);font-size:18px;max-width:620px;margin-top:18px}
-#beit-site .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:54px}
-#beit-site .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .2s,transform .2s}
-#beit-site .tool:hover{border-color:var(--line2);transform:translateY(-2px)}
-#beit-site .tool .ic{width:40px;height:40px;border-radius:11px;background:#1e1e21;border:1px solid var(--line2);display:grid;place-items:center;margin-bottom:18px}
-#beit-site .tool .ic svg{width:20px;height:20px;fill:none;stroke:#e5e5ea;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* grade de ferramentas */
+#beit-site .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:54px}
+#beit-site .tool{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;transition:border-color .2s,transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+#beit-site .tool:hover{border-color:var(--line2);transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.18)}
+#beit-site .tool .ic{width:40px;height:40px;border-radius:11px;background:#f0f0f3;border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px}
+#beit-site .tool .ic svg{width:20px;height:20px;fill:none;stroke:#1d1d1f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 #beit-site .tool h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
 #beit-site .tool .host{font-size:13px;color:var(--dim);margin:2px 0 10px}
-#beit-site .tool p{font-size:14.5px;color:var(--muted);line-height:1.55}
-/* destaque com painéis */
-#beit-site .feature{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-#beit-site .feature.rev{grid-template-columns:.9fr 1.1fr}
-#beit-site .feature.rev .panels{order:-1}
-#beit-site .bul{list-style:none;margin-top:28px;display:grid;gap:14px}
-#beit-site .bul li{display:flex;gap:12px;font-size:16px;color:#d1d1d6}
+#beit-site .tool p{font-size:14.5px;color:var(--muted);line-height:1.55;flex:1}
+#beit-site .tool .more{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:13.5px;font-weight:500;color:#0a6cdc;transition:gap .25s}
+#beit-site .tool:hover .more{gap:10px}
+#beit-site .tool .tag{position:absolute;top:22px;right:22px;font-size:11.5px;font-weight:500;color:#0a6cdc;background:#e8f1fd;border-radius:20px;padding:3px 9px}
+#beit-site .tool.star{border-color:#b9d3f6}
+#beit-site .gridlabel{font-size:13px;color:var(--dim);font-weight:500;margin:44px 0 -36px;letter-spacing:.01em}
+/* Photo em destaque */
+#beit-site .photo-wrap{display:grid;grid-template-columns:.9fr 1.2fr;gap:56px;align-items:center}
+#beit-site .pshots{display:flex;gap:14px;justify-content:center;align-items:flex-start}
+#beit-site .pshots img{width:31%;border-radius:14px;border:1px solid var(--line2)}
+#beit-site .pshots img:nth-child(2){margin-top:44px}
+#beit-site .pshots img:nth-child(3){margin-top:88px}
+#beit-site .nums{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 30px;margin-top:34px}
+#beit-site .nums div{border-top:1px solid var(--line2);padding-top:14px}
+#beit-site .nums b{display:block;font-size:30px;font-weight:600;letter-spacing:-.03em}
+#beit-site .nums span{color:var(--muted);font-size:14.5px}
+#beit-site .bul{list-style:none;margin-top:26px;display:grid;gap:12px}
+#beit-site .bul li{display:flex;gap:12px;font-size:16px;color:var(--text);opacity:.9}
 #beit-site .bul li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:10px}
-#beit-site .panels{display:flex;gap:16px;justify-content:center}
-#beit-site .panels img{width:min(46%,280px);border-radius:16px;border:1px solid var(--line2)}
-#beit-site .panels img:nth-child(2){margin-top:46px}
+/* apps */
+#beit-site .apps{display:grid;gap:110px;margin-top:80px}
+#beit-site .app{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+#beit-site .app.rev{grid-template-columns:1.1fr .9fr}
+#beit-site .app.rev .media{order:-1}
+#beit-site .app h3{font-size:clamp(28px,3vw,38px);font-weight:600;letter-spacing:-.03em}
+#beit-site .app h3 small{display:block;font-size:14px;font-weight:500;color:#0a6cdc;letter-spacing:0;margin-bottom:10px}
+#beit-site .app p.desc{color:var(--muted);font-size:17px;margin-top:14px}
+#beit-site .media{position:relative}
+#beit-site .media img{border-radius:14px;border:1px solid #d2d2d7;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+#beit-site .media img.over{position:absolute;width:62%;right:-4%;bottom:-14%;border-radius:12px}
+#beit-site .feats{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:26px}
+#beit-site .feats div{font-size:14.5px;color:var(--muted)}
+#beit-site .feats b{display:block;color:var(--text);font-weight:600;font-size:15px;margin-bottom:2px}
+/* Motion e Cut */
+#beit-site .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:54px}
+#beit-site .duo .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px 34px 0;overflow:hidden;display:flex;flex-direction:column}
+#beit-site .duo h3{font-size:24px;font-weight:600;letter-spacing:-.02em}
+#beit-site .duo .host{color:var(--dim);font-size:13.5px;margin:2px 0 12px}
+#beit-site .duo p{color:var(--muted);font-size:15.5px}
+#beit-site .duo .more{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:14px;font-weight:500;color:var(--blue);cursor:pointer;background:none;border:0;font-family:inherit;padding:0}
+#beit-site .duo img{width:78%;margin:30px auto 0;border-radius:14px 14px 0 0;border:1px solid var(--line2);border-bottom:0}
 /* números */
-#beit-site .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:54px}
+#beit-site .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:70px}
 #beit-site .stat{border-top:1px solid var(--line2);padding-top:18px}
 #beit-site .stat b{display:block;font-size:38px;font-weight:600;letter-spacing:-.03em}
 #beit-site .stat span{color:var(--muted);font-size:14.5px}
@@ -68,7 +105,7 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site .pricing{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
 #beit-site .plan{background:linear-gradient(180deg,#141821,#111113);border:1px solid #23324a;border-radius:22px;padding:36px}
 #beit-site .plan .tag{font-size:13px;color:var(--blue);font-weight:500}
-#beit-site .plan .val{display:flex;align-items:baseline;gap:6px;margin:12px 0 4px}
+#beit-site .plan .val{display:flex;align-items:baseline;gap:6px;margin:12px 0 4px;flex-wrap:wrap}
 #beit-site .plan .val b{white-space:nowrap;font-size:clamp(44px,12vw,58px);font-weight:600;letter-spacing:-.04em}
 #beit-site .plan .val span{color:var(--muted)}
 #beit-site .plan .small{color:var(--dim);font-size:14px}
@@ -76,6 +113,16 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site .plan li{display:flex;gap:11px;font-size:15px;color:#d1d1d6}
 #beit-site .plan li svg{flex:none;width:18px;height:18px;margin-top:3px;fill:none;stroke:var(--blue);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #beit-site .plan .btn{width:100%}
+/* Método */
+#beit-site .metodo{display:grid;grid-template-columns:.8fr 1.2fr;background:#fff;border:1px solid var(--line);border-radius:28px;overflow:hidden}
+#beit-site .metodo .pic{background:#0d3a66;min-height:460px}
+#beit-site .metodo .pic img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+#beit-site .metodo .body{padding:56px}
+#beit-site .metodo h2{font-size:clamp(30px,3.6vw,44px)}
+#beit-site .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+#beit-site .chips span{border:1px solid var(--line2);border-radius:20px;padding:6px 13px;font-size:13.5px;color:var(--text)}
+#beit-site .chips s{color:var(--dim)}
+#beit-site .metodo .ctas{justify-content:flex-start;margin-top:30px}
 /* faq */
 #beit-site .faq{margin-top:46px;border-top:1px solid var(--line)}
 #beit-site details{border-bottom:1px solid var(--line);padding:22px 0}
@@ -84,32 +131,61 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site summary::after{content:"+";color:var(--dim);font-weight:300;font-size:24px;line-height:1}
 #beit-site details[open] summary::after{content:"–"}
 #beit-site details p{color:var(--muted);margin-top:12px;font-size:15.5px;max-width:760px}
-/* método */
-#beit-site .metodo{border:1px solid #23324a;border-radius:22px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;background:linear-gradient(135deg,#101826,#0d0e11 60%)}
-#beit-site .metodo h2{font-size:clamp(28px,3.6vw,42px)}
-#beit-site .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
-#beit-site .chips span{border:1px solid var(--line2);border-radius:20px;padding:6px 13px;font-size:13.5px;color:#d1d1d6}
-#beit-site .chips s{color:var(--dim)}
-/* rodapé */
 #beit-site footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--dim);font-size:13.5px}
 #beit-site footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-/* entrada suave ao rolar */
+/* janela de detalhes */
+#beit-site dialog{border:0;padding:0;background:transparent;max-width:min(880px,calc(100vw - 32px));width:100%;margin:auto;color:#1d1d1f}
+#beit-site dialog::backdrop{background:rgba(10,10,12,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+#beit-site dialog[open]{animation:bpop .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes bpop{from{opacity:0;transform:translateY(14px) scale(.98)}}
+#beit-site .dlg{background:#fff;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;max-height:calc(100vh - 48px)}
+#beit-site .dlg.noimg{grid-template-columns:1fr}
+#beit-site .dlg .dimg{background:#f0f0f3;display:flex;align-items:center;justify-content:center;padding:28px;overflow:hidden}
+#beit-site .dlg .dimg img{max-height:520px;width:auto;max-width:100%;border-radius:12px;border:1px solid #d2d2d7}
+#beit-site .dlg .dtxt{padding:40px;overflow:auto;position:relative}
+#beit-site .dlg .dhost{font-size:13px;color:#0a6cdc;font-weight:500}
+#beit-site .dlg h3{font-size:30px;font-weight:600;letter-spacing:-.03em;margin:6px 0 10px}
+#beit-site .dlg .dintro{color:#5f5f66;font-size:16px}
+#beit-site .dlg ul{list-style:none;margin-top:22px;display:grid;gap:12px}
+#beit-site .dlg li{display:flex;gap:11px;font-size:15px;color:#1d1d1f;line-height:1.5}
+#beit-site .dlg li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:#0A84FF;margin-top:8px}
+#beit-site .dlg .x{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:0;background:#f0f0f3;cursor:pointer;display:grid;place-items:center}
+#beit-site .dlg .x svg{width:14px;height:14px;stroke:#1d1d1f;stroke-width:2;fill:none;stroke-linecap:round}
+#beit-site .dlg .dcta{margin-top:28px}
+/* entrada suave */
 #beit-site .rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 #beit-site .rv.in{opacity:1;transform:none}
+@media (max-width:1000px){#beit-site .grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){
   #beit-site .links{display:none}
-  #beit-site .grid{grid-template-columns:1fr 1fr}
-  #beit-site .feature,#beit-site .feature.rev,#beit-site .pricing,#beit-site .metodo{grid-template-columns:1fr;gap:36px}
-  #beit-site .feature.rev .panels{order:0}
+  #beit-site .photo-wrap,#beit-site .app,#beit-site .app.rev,#beit-site .pricing,#beit-site .duo,#beit-site .metodo{grid-template-columns:1fr;gap:36px}
+  #beit-site .app.rev .media{order:0}
+  #beit-site .apps{gap:80px}
   #beit-site .stats{grid-template-columns:1fr 1fr}
   #beit-site section.block{padding:80px 0}
-  #beit-site .metodo{padding:30px}
+  #beit-site .metodo{gap:0}
+  #beit-site .metodo .pic{min-height:0;aspect-ratio:1}
+  #beit-site .metodo .body{padding:32px}
+  #beit-site .dlg{grid-template-columns:1fr}
+  #beit-site .dlg .dimg{padding:18px;max-height:260px}
+  #beit-site .dlg .dimg img{max-height:230px}
+  #beit-site .dlg .dtxt{padding:28px}
+  #beit-site .media img.over{position:static;width:100%;margin-top:14px}
 }
 @media (max-width:560px){
   #beit-site{font-size:16px}
-  #beit-site .grid{grid-template-columns:1fr}
+  #beit-site .grid{grid-template-columns:1fr 1fr;gap:10px}
+  #beit-site .tool{padding:16px;border-radius:14px}
+  #beit-site .tool p{display:none}
+  #beit-site .tool .ic{margin-bottom:12px;width:34px;height:34px}
+  #beit-site .tool h3{font-size:15px}
+  #beit-site .tool .host{font-size:12px;margin-bottom:0}
+  #beit-site .tool .more{margin-top:10px;font-size:12.5px}
+  #beit-site .tool .tag{top:14px;right:14px;font-size:10.5px}
+  #beit-site .feats{grid-template-columns:1fr}
   #beit-site .hero{padding-top:80px}
   #beit-site .nav .btn{display:none}
+  #beit-site .duo .card{padding:26px 26px 0}
 }
 @media (prefers-reduced-motion:reduce){#beit-site .rv{opacity:1;transform:none;transition:none}}
 </style>
@@ -117,64 +193,146 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
 <div id="beit-site">
   <header class="nav"><div class="wrap">
     <a class="brand" href="#topo"><i><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/logo-beit.png" alt=""></i>Beit Hub</a>
-    <nav class="links"><a href="#ferramentas">Ferramentas</a><a href="#legendas">Legendas</a><a href="#preco">Preço</a><a href="#perguntas">Perguntas</a></nav>
+    <nav class="links"><a href="#ferramentas">Ferramentas</a><a href="#photo">Photoshop</a><a href="#apps">Apps</a><a href="#preco">Preço</a><a href="#metodo">Método Beit</a></nav>
     <a class="btn primary sm" href="https://pay.hotmart.com/A108246551Q?off=jq25f6ub">Assinar</a>
   </div></header>
 
   <div class="hero" id="topo"><div class="wrap">
-    <div class="eyebrow rv"><b>Novo</b> Estúdio de legendas no Premiere</div>
+    <div class="eyebrow rv"><b>Beit Pass</b> 12 ferramentas numa assinatura só</div>
     <h1 class="rv">Tudo o que o seu estúdio usa, <em>num lugar só.</em></h1>
-    <p class="lead rv">Plugins para After Effects, Premiere e Photoshop, áudio e câmera para o OBS e os apps que organizam o seu dia. Feito de designer para designer.</p>
+    <p class="lead rv">Plugins para Photoshop, After Effects e Premiere, áudio e câmera para o OBS e apps que organizam pedidos, agenda, orçamentos e o seu PC. Feito de designer para designer.</p>
     <div class="ctas rv">
       <a class="btn primary" href="https://pay.hotmart.com/A108246551Q?off=jq25f6ub">Assinar o Beit Pass</a>
       <a class="btn ghost" href="#ferramentas">Ver o que vem dentro <svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
     </div>
     <p class="price-note rv">R$ 49,90 por mês · cancele quando quiser · 7 dias de garantia</p>
-    <div class="shot rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app.jpg" alt="Beit Hub no Windows" loading="lazy"></div>
+    <div class="shot rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app.jpg" alt="Beit Hub no Windows"></div>
   </div></div>
 
-  <section class="block" id="ferramentas"><div class="wrap">
-    <div class="kicker rv">O que vem no Beit Pass</div>
-    <h2 class="rv">Uma assinatura. <em>Todo o ecossistema.</em></h2>
-    <p class="sub rv">O Beit Hub instala, atualiza e organiza tudo. Saiu versão nova? Ela chega sozinha, com um clique.</p>
+  <section class="block light" id="ferramentas"><div class="wrap">
+    <div class="center">
+      <div class="kicker rv">O que vem no Beit Pass</div>
+      <h2 class="rv">Uma assinatura. <em>Todo o ecossistema.</em></h2>
+      <p class="sub rv">O Beit Hub instala, atualiza e organiza tudo. Clique em cada ferramenta para ver o que tem dentro.</p>
+    </div>
+    <div class="gridlabel rv">Plugins e recursos</div>
     <div class="grid">
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="12" r="3"/><path d="M11 12h2"/></svg></div><h3>Beit Hub Motion</h3><div class="host">After Effects</div><p>Mais de 200 animações de texto, camada e transição, efeitos contínuos, áudio e ferramentas do dia a dia. Tudo editável no próprio After.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/><path d="M12 4v16"/></svg></div><h3>Beit Hub Cut</h3><div class="host">Premiere Pro</div><p>Corte de silêncio, voz nivelada, estúdio de legendas com 18 estilos e reenquadrar para 9:16, 1:1 e 16:9 seguindo o rosto.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20l7-7"/><path d="M14 4l6 6-8 8-6-6z"/></svg></div><h3>Beit Hub Photo</h3><div class="host">Photoshop</div><p>Tratamento de pele, estilos Camera Raw, finalização, patterns, vidros e a arte em todos os formatos de rede num clique.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z"/></svg></div><h3>Beit Hub Colors</h3><div class="host">Photoshop</div><p>Paletas e gradientes prontos, com prévia, para aplicar direto na arte.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h2M8 8v8M12 5v14M16 8v8M20 11v2"/></svg></div><h3>Beit Sonor</h3><div class="host">OBS e programas de áudio</div><p>A cadeia completa de voz num plugin só: EQ, compressor, de-esser, limitador, reverb e presets prontos.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></div><h3>Beit Cam</h3><div class="host">OBS Studio</div><p>Luz, cor, curvas, pele e LUT da sua câmera num painel só, dentro do OBS.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div><h3>Beit Work</h3><div class="host">App</div><p>Pedidos em quadro, agenda dos artistas, agendas mensais, checklist e cronômetro.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-7"/><path d="M15 9h5v5"/></svg></div><h3>Beit Finance</h3><div class="host">App</div><p>Entradas, saídas, avulsos e o resumo do mês por quinzena.</p></div>
-      <div class="tool rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></div><h3>Beit Doc e Beit Clear</h3><div class="host">Apps</div><p>Orçamentos, contratos e recibos em PDF. E uma limpeza honesta do PC, com caches do Adobe e duplicados.</p></div>
+      <button class="tool star rv" data-t="photo"><span class="tag">Destaque</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 20l7-7"/><path d="M14 4l6 6-8 8-6-6z"/></svg></div><h3>Beit Hub Photo</h3><div class="host">Photoshop</div><p>Mais de 170 tratamentos, filtros, cores e texturas, e a arte em todos os formatos de rede.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="motion"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="3"/><circle cx="16" cy="12" r="3"/><path d="M11 12h2"/></svg></div><h3>Beit Hub Motion</h3><div class="host">After Effects</div><p>Mais de 200 animações de texto, camada e transição, editáveis no próprio After.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="cut"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg></div><h3>Beit Hub Cut</h3><div class="host">Premiere Pro</div><p>Corte de silêncio, voz nivelada, estúdio de legendas e reenquadrar para as redes.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="colors"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z"/></svg></div><h3>Beit Hub Colors</h3><div class="host">Photoshop</div><p>Roda de cores, harmonias e paletas tiradas da própria imagem.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="pedido"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div><h3>Beit Hub Pedido</h3><div class="host">Photoshop</div><p>O pedido do Beit Work aberto dentro do Photoshop, com briefing e cronômetro.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="sonor"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12h2M8 8v8M12 5v14M16 8v8M20 11v2"/></svg></div><h3>Beit Sonor</h3><div class="host">OBS e programas de áudio</div><p>A cadeia completa de voz num plugin só, com presets prontos.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="cam"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg></div><h3>Beit Cam</h3><div class="host">OBS Studio</div><p>Luz, cor, pele e LUT da sua câmera num painel só.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="fontes"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 19L11 5h2l6 14M8 14h8"/></svg></div><h3>Beit Fontes</h3><div class="host">Todos os programas</div><p>38 fontes de uso comercial liberado, instaladas num clique.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+    </div>
+    <div class="gridlabel rv" style="margin-top:56px">Apps do Beit Hub</div>
+    <div class="grid">
+      <button class="tool rv" data-t="work"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg></div><h3>Beit Work</h3><div class="host">Pedidos e agenda</div><p>Quadro de pedidos, agenda dos artistas, checklist e cronômetro.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="doc"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg></div><h3>Beit Doc</h3><div class="host">Orçamentos e contratos</div><p>Orçamento com preço calculado, contratos, recibos e mensagens.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="clear"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></div><h3>Beit Clear</h3><div class="host">Limpeza do PC</div><p>Libera espaço com segurança: caches do Adobe, duplicados e mais.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+      <button class="tool rv" data-t="finance"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-7"/><path d="M15 9h5v5"/></svg></div><h3>Beit Finance</h3><div class="host">Financeiro</div><p>Entradas, saídas, avulsos e o resumo do mês por quinzena.</p><span class="more">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+    </div>
+  </div></section>
+
+  <section class="block" id="photo"><div class="wrap photo-wrap">
+    <div>
+      <div class="kicker rv">Beit Hub Photo · Photoshop</div>
+      <h2 class="rv">O plugin de Photoshop <em>que faltava.</em></h2>
+      <p class="sub rv">Para After e Premiere existe muita coisa. Para Photoshop, quase nada que preste. O Beit Hub Photo reúne num painel o que um designer usa todo dia, com prévia de cada efeito e tudo editável na sua arte.</p>
+      <div class="nums">
+        <div class="rv"><b>17</b><span>tratamentos de Camera Raw, de pele a preto e branco</span></div>
+        <div class="rv"><b>113</b><span>vinhetas, gradientes, pontos de luz e paletas</span></div>
+        <div class="rv"><b>32</b><span>texturas de vidro, grão, papel e superfícies</span></div>
+        <div class="rv"><b>1 clique</b><span>para ter a arte em todos os formatos de rede</span></div>
+      </div>
+      <div class="ctas rv" style="justify-content:flex-start"><button class="btn ghost" data-t="photo">Ver tudo o que tem no Photo</button></div>
+    </div>
+    <div class="pshots rv">
+      <img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/photo-1.jpg" alt="Tratamentos do Beit Hub Photo" loading="lazy">
+      <img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/photo-2.jpg" alt="Texturas do Beit Hub Photo" loading="lazy">
+      <img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/photo-3.jpg" alt="Safe zone e formatos para redes" loading="lazy">
+    </div>
+  </div></section>
+
+  <section class="block light" id="apps"><div class="wrap">
+    <div class="center">
+      <div class="kicker rv">O nosso diferencial</div>
+      <h2 class="rv">Não é só plugin. <em>É o seu estúdio organizado.</em></h2>
+      <p class="sub rv">Nenhum pacote de plugins cuida do que vem antes e depois da arte. O Beit Hub cuida: do pedido que chega ao recibo que sai, com quatro apps que rodam no seu computador, sem mensalidade extra e sem os seus dados em servidor de ninguém.</p>
+    </div>
+    <div class="apps">
+      <div class="app">
+        <div>
+          <h3 class="rv"><small>Beit Work</small>Todos os pedidos e a agenda dos artistas num quadro só.</h3>
+          <p class="desc rv">Cada pedido vira um cartão com cliente, prazo, briefing, checklist e cronômetro. Você arrasta de "Pedidos" para "Em andamento" e vê na hora o que está atrasado e o que vence na semana.</p>
+          <div class="feats">
+            <div class="rv"><b>Agenda dos artistas</b>As datas de cada cliente num calendário, com local, cidade e horário de cada evento.</div>
+            <div class="rv"><b>Agendas mensais</b>Uma coluna só para as artes de agenda do mês, sem misturar com o resto.</div>
+            <div class="rv"><b>Cronômetro e checklist</b>Saiba quanto tempo cada arte levou e o que falta entregar.</div>
+            <div class="rv"><b>Direto no Photoshop</b>Com o Beit Hub Pedido, o briefing abre no Photoshop e a agenda vira texto em um clique.</div>
+          </div>
+        </div>
+        <div class="media rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/app-work.jpg" alt="Quadro de pedidos do Beit Work" loading="lazy"><img class="over" src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/app-agenda.jpg" alt="Agenda dos artistas no Beit Work" loading="lazy"></div>
+      </div>
+      <div class="app rev">
+        <div>
+          <h3 class="rv"><small>Beit Doc</small>Orçamento, contrato e recibo sem abrir o Word.</h3>
+          <p class="desc rv">Você diz quanto quer ganhar e quanto gasta, e o Doc calcula quanto vale a sua hora e o preço justo de cada arte. A proposta sai pronta para o WhatsApp, e o contrato e o recibo saem em PDF com os seus dados.</p>
+          <div class="feats">
+            <div class="rv"><b>Preço sugerido</b>Pela sua hora, complexidade, urgência e uso da arte.</div>
+            <div class="rv"><b>Contratos prontos</b>Prestação de serviço, plano mensal, cessão e aprovação de arte.</div>
+            <div class="rv"><b>Briefings</b>O briefing aprovado vira pedido no Work com um clique.</div>
+            <div class="rv"><b>Recibos e mensagens</b>Recibo em PDF e mensagens prontas para o cliente.</div>
+          </div>
+        </div>
+        <div class="media rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/app-doc.jpg" alt="Orçamento no Beit Doc" loading="lazy"></div>
+      </div>
+      <div class="app">
+        <div>
+          <h3 class="rv"><small>Beit Clear</small>O seu PC leve de novo, sem programa duvidoso.</h3>
+          <p class="desc rv">O Adobe enche o disco de cache sem avisar. O Clear mostra de onde saiu cada gigabyte e limpa só o que pode sair, explicando cada item. Sem "otimizador" milagroso, sem apagar o que não deve.</p>
+          <div class="feats">
+            <div class="rv"><b>Caches do Adobe</b>Media Cache, cache de disco do After, Camera Raw e temporários do Photoshop.</div>
+            <div class="rv"><b>Mapa do disco</b>Veja as pastas e os arquivos grandes que ocupam espaço.</div>
+            <div class="rv"><b>Duplicados</b>Encontre arquivos repetidos e escolha o que fica.</div>
+            <div class="rv"><b>Inicialização e programas</b>O que abre com o Windows e o que já pode sair.</div>
+          </div>
+        </div>
+        <div class="media rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/app-clear.jpg" alt="Visão geral do Beit Clear" loading="lazy"></div>
+      </div>
+      <div class="app rev">
+        <div>
+          <h3 class="rv"><small>Beit Finance</small>O dinheiro do estúdio, sem planilha.</h3>
+          <p class="desc rv">Entradas de clientes fixos, avulsos e contas do mês, separados por quinzena. Você vê o saldo, o que falta receber e o que falta pagar.</p>
+          <div class="feats">
+            <div class="rv"><b>Por quinzena</b>Dias 1 a 15 e 16 a 31, do jeito que o designer recebe.</div>
+            <div class="rv"><b>A receber e a pagar</b>Nada esquecido no fim do mês.</div>
+          </div>
+        </div>
+        <div class="media rv"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/app-finance.jpg" alt="Visão geral do Beit Finance" loading="lazy"></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="block" id="video"><div class="wrap">
+    <div class="center">
+      <div class="kicker rv">Vídeo e transmissão</div>
+      <h2 class="rv">After, Premiere e OBS <em>no mesmo padrão.</em></h2>
+    </div>
+    <div class="duo">
+      <div class="card rv"><h3>Beit Hub Motion</h3><div class="host">After Effects</div><p>Animações de texto, camada e transição com miniaturas animadas. Aplicou, ajusta intensidade, repetição e cores ali mesmo.</p><button class="more" data-t="motion">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/motion-panel.jpg" alt="Beit Hub Motion" loading="lazy"></div>
+      <div class="card rv"><h3>Beit Hub Cut</h3><div class="host">Premiere Pro</div><p>Corta os silêncios, nivela a voz, gera legendas com 18 estilos e reenquadra para Reels seguindo o rosto.</p><button class="more" data-t="cut">Ver o que tem <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/cut-panel.jpg" alt="Beit Hub Cut" loading="lazy"></div>
     </div>
     <div class="stats">
-      <div class="stat rv"><b>10</b><span>ferramentas na assinatura</span></div>
-      <div class="stat rv"><b>200+</b><span>animações no Motion</span></div>
+      <div class="stat rv"><b>12</b><span>ferramentas na assinatura</span></div>
+      <div class="stat rv"><b>370+</b><span>animações, efeitos e recursos</span></div>
       <div class="stat rv"><b>38</b><span>fontes do pack Beit</span></div>
       <div class="stat rv"><b>1 clique</b><span>para instalar e atualizar</span></div>
     </div>
   </div></section>
 
-  <section class="block" id="legendas" style="padding-top:0"><div class="wrap feature">
-    <div>
-      <div class="kicker rv">Beit Hub Cut</div>
-      <h2 class="rv">Legendas com cara <em>de designer.</em></h2>
-      <p class="sub rv">A transcrição roda no seu PC, sem enviar nada para a internet. Você revisa, escolhe o estilo e vê a prévia exatamente como vai sair.</p>
-      <ul class="bul">
-        <li class="rv">18 estilos: limpas, destaque, impacto, pregação e louvor</li>
-        <li class="rv">Qualquer fonte do pack, cor, contorno, fundo e sombra</li>
-        <li class="rv">Arraste a legenda na prévia para mudar a altura</li>
-        <li class="rv">Salve os seus estilos e aplique com um clique</li>
-      </ul>
-    </div>
-    <div class="panels rv">
-      <img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/cut-panel.jpg" alt="Beit Hub Cut no Premiere" loading="lazy">
-      <img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/motion-panel.jpg" alt="Beit Hub Motion no After Effects" loading="lazy">
-    </div>
-  </div></section>
-
-  <section class="block" id="preco" style="padding-top:20px"><div class="wrap pricing">
+  <section class="block" id="preco" style="padding-top:20px;border-bottom:1px solid #232326"><div class="wrap pricing">
     <div>
       <div class="kicker rv">Preço</div>
       <h2 class="rv">Um preço. <em>Sem pegadinha.</em></h2>
@@ -195,28 +353,29 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
     </div>
   </div></section>
 
-  <section class="block" style="padding-top:0"><div class="wrap">
+  <section class="block light" id="metodo"><div class="wrap">
     <div class="metodo rv">
-      <div>
+      <div class="pic"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt="Cazildo Barbosa" loading="lazy"></div>
+      <div class="body">
         <div class="kicker">Método Beit · primeira turma</div>
-        <h2>O curso que eu queria ter tido <em>quando comecei.</em></h2>
-        <p class="sub">Mais de dez anos criando para artistas e igrejas de todo o Brasil, organizados em um curso: a base que sustenta um bom design, o negócio e os clientes, e projetos reais no Photoshop, After e Premiere.</p>
+        <h2>Ferramenta acelera. <em>Formação sustenta.</em></h2>
+        <p class="sub">Sou o Cazildo Barbosa, designer há mais de dez anos, criando para artistas, ministérios e igrejas de todo o Brasil. No Método Beit eu ensino o que está por trás de cada arte: o fundamento, o negócio, os clientes e projetos reais no Photoshop, After e Premiere.</p>
         <div class="chips"><span><s>R$ 997</s> R$ 597 na primeira turma</span><span>Lançamento 16/11</span><span>Inscrições até 16/12</span></div>
+        <div class="ctas"><a class="btn primary" href="/metodo-beit/">Conhecer o Método Beit</a></div>
       </div>
-      <a class="btn primary" href="https://pay.hotmart.com/D108246674K">Fazer minha pré-inscrição</a>
     </div>
   </div></section>
 
-  <section class="block" id="perguntas" style="padding-top:0"><div class="wrap">
+  <section class="block" id="perguntas"><div class="wrap">
     <div class="kicker rv">Perguntas</div>
     <h2 class="rv">Antes de assinar</h2>
     <div class="faq">
       <details class="rv"><summary>Funciona no Mac?</summary><p>Hoje o Beit Hub é para Windows 10 e 11. A versão para Mac está em desenvolvimento. Quando sair, quem assina recebe sem pagar nada a mais.</p></details>
-      <details class="rv"><summary>Quais programas eu preciso ter?</summary><p>Os plugins Adobe funcionam nas versões atuais do After Effects, Premiere Pro e Photoshop (Creative Cloud). O Sonor e o Cam funcionam no OBS Studio. Os apps Work, Finance, Doc e Clear rodam sozinhos, sem programa nenhum.</p></details>
+      <details class="rv"><summary>Quais programas eu preciso ter?</summary><p>Os plugins Adobe funcionam nas versões atuais do Photoshop, After Effects e Premiere Pro (Creative Cloud). O Sonor e o Cam funcionam no OBS Studio. Os apps Work, Doc, Clear e Finance rodam sozinhos, sem programa nenhum.</p></details>
+      <details class="rv"><summary>Os meus dados ficam onde?</summary><p>No seu computador. Pedidos, agenda, orçamentos e o financeiro ficam salvos no seu PC, e você pode fazer backup quando quiser.</p></details>
       <details class="rv"><summary>O Windows mostrou um aviso de proteção. É normal?</summary><p>Sim. O Beit Hub ainda não tem o certificado digital da Microsoft, então o Windows pode mostrar "O Windows protegeu o computador". O arquivo é original e não tem vírus: clique em "Mais informações" e depois em "Executar assim mesmo". As atualizações seguintes chegam por dentro do Hub, sem esse aviso.</p></details>
       <details class="rv"><summary>Como recebo as atualizações?</summary><p>Ao abrir o Beit Hub, ele avisa quando tem versão nova. Um clique em "Atualizar agora" e ele se atualiza, reabre e atualiza os seus plugins.</p></details>
       <details class="rv"><summary>Como eu cancelo?</summary><p>Direto na sua conta da Hotmart, quando quiser. Se cancelar nos primeiros 7 dias, você recebe o dinheiro de volta.</p></details>
-      <details class="rv"><summary>O curso Método Beit está incluído?</summary><p>Não. O Método Beit é vendido à parte. O Beit Pass inclui as ferramentas e as aulas de como usar cada uma.</p></details>
     </div>
   </div></section>
 
@@ -224,9 +383,40 @@ body:has(#beit-site){background:#0b0b0c;margin:0}
     <div>© 2026 Beit · Feito de designer para designer.</div>
     <div><a href="https://github.com/Beit-15/beit-hub-updates/raw/main/Instalar-Beit-Hub.exe">Baixar o Beit Hub (para quem já assina)</a></div>
   </div></footer>
+
+  <dialog id="beit-dlg"><div class="dlg"><div class="dimg"><img alt=""></div><div class="dtxt">
+    <button class="x" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="dhost"></div><h3></h3><p class="dintro"></p><ul></ul>
+    <div class="dcta"><a class="btn primary" href="https://pay.hotmart.com/A108246551Q?off=jq25f6ub">Assinar o Beit Pass</a></div>
+  </div></div></dialog>
 </div>
 <script>
-(function(){var els=document.querySelectorAll('#beit-site .rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+(function(){
+var S='https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/';
+var T={
+photo:{n:'Beit Hub Photo',h:'Photoshop',img:'photo-1.jpg',i:'O painel que reúne o que um designer usa todo dia no Photoshop, com prévia de cada efeito e tudo editável.',l:['Tratar: 17 tratamentos de Camera Raw sem abrir a janela, entre essenciais, pele, looks e preto e branco','Filtros e finalização: 14 acabamentos para fechar a arte','Cores: 16 vinhetas, 59 gradientes, 16 pontos de luz e 22 paletas','Pattern: 32 texturas de vidro, grão e papel, superfícies e gráficos','Safe zone para Reels, TikTok, Shorts, Story, grade do Instagram e capa do YouTube','Formatos para redes: a mesma arte em feed, stories, quadrado, YouTube, capa de single e mais, num clique','Exportar e ações do dia a dia']},
+motion:{n:'Beit Hub Motion',h:'After Effects',img:'motion-panel.jpg',i:'Animações prontas e ferramentas do dia a dia no After Effects, tudo editável depois de aplicar.',l:['Mais de 200 animações de texto, camada e transição, com miniatura animada de cada uma','Efeitos contínuos como brilho, luz e piscar de cor, para camada e texto','Aba Editar: ajuste intensidade, repetições e cores depois de aplicar','Biblioteca em pastas, com busca e favoritos','Animação Express (beta) e ferramentas do dia a dia']},
+cut:{n:'Beit Hub Cut',h:'Premiere Pro',img:'cut-panel.jpg',i:'O trabalho repetitivo do Premiere feito em segundos.',l:['Corte de silêncio automático','Voz nivelada no vídeo inteiro','Estúdio de legendas: transcrição no seu PC, 18 estilos, qualquer fonte do pack, cor, contorno e fundo, com prévia','Reenquadrar para 9:16, 1:1 e 16:9 seguindo o rosto','Biblioteca de transições, títulos, looks e sons','Capa e quadros do vídeo em PNG e zoom lento']},
+colors:{n:'Beit Hub Colors',h:'Photoshop',i:'Tudo o que envolve cor, num painel ao lado da arte.',l:['Roda de cores com harmonias','Paleta e gradiente tirados da própria imagem','Teste de contraste e simulação de daltonismo','Amostras direto no Photoshop e exportação .ase']},
+pedido:{n:'Beit Hub Pedido',h:'Photoshop',i:'A ponte entre o Beit Work e o Photoshop.',l:['Briefing e checklist do pedido ao lado da arte','Cronômetro que conta o tempo de cada pedido','Documento aberto no tamanho certo','A agenda do artista vira texto na arte em um clique','O que você edita volta para o Work']},
+sonor:{n:'Beit Sonor',h:'OBS e programas de áudio · VST3',i:'A sua voz tratada como em estúdio, num plugin só.',l:['EQ, compressor, de-esser, limitador e reverb na ordem certa','Presets prontos para voz','Funciona no OBS e nos programas de áudio que aceitam VST3']},
+cam:{n:'Beit Cam',h:'OBS Studio',i:'A imagem da sua câmera ajustada sem trocar de janela.',l:['Luz, cor e curvas','Ajuste de pele','LUTs','Tudo num painel só dentro do OBS']},
+fontes:{n:'Beit Fontes',h:'Todos os programas',i:'O pack de fontes do ecossistema, instalado pelo Beit Hub.',l:['38 fontes gratuitas, de uso comercial liberado','Sans modernas, serifadas, títulos e condensadas, manuscritas e monoespaçadas','Instaladas num clique e usadas também nas legendas do Cut']},
+work:{n:'Beit Work',h:'App · pedidos e agenda',img:'app-work.jpg',i:'O quadro onde o seu estúdio inteiro cabe.',l:['Pedidos em quadro: Pedidos, Em andamento e Agendas mensais','Agenda dos artistas em calendário, com local, cidade e horário','Clientes com cor própria e filtro por cliente','Checklist, prazo e cronômetro em cada pedido','Integração com o Beit Doc e com o Photoshop','Backup dos dados quando você quiser']},
+doc:{n:'Beit Doc',h:'App · orçamentos e documentos',img:'app-doc.jpg',i:'A parte burocrática resolvida em minutos.',l:['Orçamento com preço sugerido pela sua hora, complexidade e urgência','Proposta pronta para enviar no WhatsApp','Contratos de serviço, plano mensal, cessão de uso e aprovação de arte','Briefings que viram pedido no Work','Recibos em PDF e mensagens prontas para o cliente']},
+clear:{n:'Beit Clear',h:'App · limpeza do PC',img:'app-clear.jpg',i:'Limpeza honesta, explicada item por item.',l:['Caches do Adobe, dos navegadores e temporários','Mapa do disco e arquivos grandes','Arquivos duplicados','Programas que abrem com o Windows','Saúde do PC e histórico de limpezas']},
+finance:{n:'Beit Finance',h:'App · financeiro',img:'app-finance.jpg',i:'O financeiro do designer, simples de verdade.',l:['Entradas de clientes fixos e avulsos','Saídas e contas do mês','Resumo por quinzena','A receber e a pagar','Notas fiscais pendentes']}
+};
+var d=document.getElementById('beit-dlg');if(!d)return;var box=d.querySelector('.dlg'),im=d.querySelector('.dimg img');
+function open(k){var t=T[k];if(!t)return;d.querySelector('.dhost').textContent=t.h;d.querySelector('h3').textContent=t.n;d.querySelector('.dintro').textContent=t.i;
+var ul=d.querySelector('ul');ul.innerHTML='';t.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});
+if(t.img){im.src=S+t.img;im.alt=t.n;box.classList.remove('noimg')}else{box.classList.add('noimg')}
+if(d.showModal)d.showModal();else d.setAttribute('open','')}
+document.querySelectorAll('#beit-site [data-t]').forEach(function(b){b.addEventListener('click',function(){open(b.dataset.t)})});
+d.querySelector('.x').addEventListener('click',function(){d.close()});
+d.addEventListener('click',function(e){if(e.target===d)d.close()});
+var els=document.querySelectorAll('#beit-site .rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
-els.forEach(function(e,i){e.style.transitionDelay=(i%4)*60+'ms';io.observe(e)});})();
+els.forEach(function(e,i){e.style.transitionDelay=(i%4)*60+'ms';io.observe(e)});
+})();
 </script>
