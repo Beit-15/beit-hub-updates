@@ -1,0 +1,254 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+#beit-metodo{--bg:#0b0b0c;--bg2:#111113;--card:#161618;--line:#232326;--line2:#2e2e32;--text:#f5f5f7;--muted:#a1a1a6;--dim:#6e6e73;--blue:#0A84FF;
+  background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  margin:0;width:100%;overflow:hidden}
+body:has(#beit-metodo){background:#0b0b0c;margin:0}
+#beit-metodo *{box-sizing:border-box;margin:0;padding:0}
+#beit-metodo a{color:inherit;text-decoration:none}
+#beit-metodo img{display:block;max-width:100%}
+#beit-metodo .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+#beit-metodo .nav{position:sticky;top:0;z-index:20;background:rgba(11,11,12,.78);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+#beit-metodo .nav .wrap{display:flex;align-items:center;height:60px;gap:28px}
+#beit-metodo .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px;letter-spacing:-.01em}
+#beit-metodo .brand i{width:30px;height:30px;border-radius:8px;background:#151517;border:1px solid var(--line2);display:grid;place-items:center}
+#beit-metodo .brand img{height:17px}
+#beit-metodo .links{display:flex;gap:26px;margin-left:auto;font-size:14px;color:var(--muted)}
+#beit-metodo .links a:hover{color:var(--text)}
+#beit-metodo .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 22px;border-radius:12px;font-weight:500;font-size:15px;transition:transform .2s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s;cursor:pointer}
+#beit-metodo .btn:hover{transform:translateY(-1px)}
+#beit-metodo .btn.primary{background:var(--blue);color:#fff}
+#beit-metodo .btn.primary:hover{background:#2b95ff}
+#beit-metodo .btn.ghost{border:1px solid var(--line2);color:var(--text)}
+#beit-metodo .btn.ghost:hover{border-color:#4a4a50}
+#beit-metodo .btn.sm{height:36px;padding:0 16px;font-size:13.5px;border-radius:10px}
+#beit-metodo .btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* hero */
+#beit-metodo .hero{position:relative;padding:110px 0 40px;text-align:center}
+#beit-metodo .hero::before{content:"";position:absolute;left:50%;top:-180px;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(10,132,255,.22),rgba(10,132,255,0));pointer-events:none}
+#beit-metodo .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);border:1px solid var(--line2);border-radius:20px;padding:6px 14px;margin-bottom:26px}
+#beit-metodo .eyebrow b{color:var(--blue);font-weight:500}
+#beit-metodo h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;font-weight:600;letter-spacing:-.035em;max-width:900px;margin:0 auto}
+#beit-metodo h1 em,#beit-metodo h2 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:#cfe3ff}
+#beit-metodo .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:640px;margin:22px auto 0;font-weight:400}
+#beit-metodo .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+#beit-metodo .price-note{margin-top:14px;font-size:13.5px;color:var(--dim)}
+#beit-metodo .shot{position:relative;margin:70px auto 0;max-width:1060px;border-radius:18px;overflow:hidden;border:1px solid var(--line2);background:#161618}
+#beit-metodo .shot img{width:100%}
+/* seções */
+#beit-metodo section.block{padding:110px 0}
+#beit-metodo .kicker{font-size:14px;color:var(--blue);font-weight:500;margin-bottom:14px}
+#beit-metodo h2{font-size:clamp(32px,4.4vw,52px);line-height:1.06;font-weight:600;letter-spacing:-.03em;max-width:760px}
+#beit-metodo .sub{color:var(--muted);font-size:18px;max-width:620px;margin-top:18px}
+#beit-metodo .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:54px}
+#beit-metodo .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:border-color .2s,transform .2s}
+#beit-metodo .tool:hover{border-color:var(--line2);transform:translateY(-2px)}
+#beit-metodo .tool .ic{width:40px;height:40px;border-radius:11px;background:#1e1e21;border:1px solid var(--line2);display:grid;place-items:center;margin-bottom:18px}
+#beit-metodo .tool .ic svg{width:20px;height:20px;fill:none;stroke:#e5e5ea;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#beit-metodo .tool h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+#beit-metodo .tool .host{font-size:13px;color:var(--dim);margin:2px 0 10px}
+#beit-metodo .tool p{font-size:14.5px;color:var(--muted);line-height:1.55}
+/* destaque com painéis */
+#beit-metodo .feature{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+#beit-metodo .feature.rev{grid-template-columns:.9fr 1.1fr}
+#beit-metodo .feature.rev .panels{order:-1}
+#beit-metodo .bul{list-style:none;margin-top:28px;display:grid;gap:14px}
+#beit-metodo .bul li{display:flex;gap:12px;font-size:16px;color:#d1d1d6}
+#beit-metodo .bul li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:10px}
+#beit-metodo .panels{display:flex;gap:16px;justify-content:center}
+#beit-metodo .panels img{width:min(46%,280px);border-radius:16px;border:1px solid var(--line2)}
+#beit-metodo .panels img:nth-child(2){margin-top:46px}
+/* números */
+#beit-metodo .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:54px}
+#beit-metodo .stat{border-top:1px solid var(--line2);padding-top:18px}
+#beit-metodo .stat b{display:block;font-size:38px;font-weight:600;letter-spacing:-.03em}
+#beit-metodo .stat span{color:var(--muted);font-size:14.5px}
+/* preço */
+#beit-metodo .pricing{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+#beit-metodo .plan{background:linear-gradient(180deg,#141821,#111113);border:1px solid #23324a;border-radius:22px;padding:36px}
+#beit-metodo .plan .tag{font-size:13px;color:var(--blue);font-weight:500}
+#beit-metodo .plan .val{display:flex;align-items:baseline;gap:6px;margin:12px 0 4px}
+#beit-metodo .plan .val b{white-space:nowrap;font-size:clamp(44px,12vw,58px);font-weight:600;letter-spacing:-.04em}
+#beit-metodo .plan .val span{color:var(--muted)}
+#beit-metodo .plan .small{color:var(--dim);font-size:14px}
+#beit-metodo .plan ul{list-style:none;margin:26px 0;display:grid;gap:11px}
+#beit-metodo .plan li{display:flex;gap:11px;font-size:15px;color:#d1d1d6}
+#beit-metodo .plan li svg{flex:none;width:18px;height:18px;margin-top:3px;fill:none;stroke:var(--blue);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#beit-metodo .plan .btn{width:100%}
+/* faq */
+#beit-metodo .faq{margin-top:46px;border-top:1px solid var(--line)}
+#beit-metodo details{border-bottom:1px solid var(--line);padding:22px 0}
+#beit-metodo summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font-size:17px;font-weight:500}
+#beit-metodo summary::-webkit-details-marker{display:none}
+#beit-metodo summary::after{content:"+";color:var(--dim);font-weight:300;font-size:24px;line-height:1}
+#beit-metodo details[open] summary::after{content:"–"}
+#beit-metodo details p{color:var(--muted);margin-top:12px;font-size:15.5px;max-width:760px}
+/* método */
+#beit-metodo .metodo{border:1px solid #23324a;border-radius:22px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;background:linear-gradient(135deg,#101826,#0d0e11 60%)}
+#beit-metodo .metodo h2{font-size:clamp(28px,3.6vw,42px)}
+#beit-metodo .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+#beit-metodo .chips span{border:1px solid var(--line2);border-radius:20px;padding:6px 13px;font-size:13.5px;color:#d1d1d6}
+#beit-metodo .chips s{color:var(--dim)}
+/* rodapé */
+#beit-metodo footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--dim);font-size:13.5px}
+#beit-metodo footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* entrada suave ao rolar */
+#beit-metodo .rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+#beit-metodo .rv.in{opacity:1;transform:none}
+@media (max-width:900px){
+  #beit-metodo .links{display:none}
+  #beit-metodo .grid{grid-template-columns:1fr 1fr}
+  #beit-metodo .feature,#beit-metodo .feature.rev,#beit-metodo .pricing,#beit-metodo .metodo{grid-template-columns:1fr;gap:36px}
+  #beit-metodo .feature.rev .panels{order:0}
+  #beit-metodo .stats{grid-template-columns:1fr 1fr}
+  #beit-metodo section.block{padding:80px 0}
+  #beit-metodo .metodo{padding:30px}
+}
+@media (max-width:560px){
+  #beit-metodo{font-size:16px}
+  #beit-metodo .grid{grid-template-columns:1fr}
+  #beit-metodo .hero{padding-top:80px}
+  #beit-metodo .nav .btn{display:none}
+}
+@media (prefers-reduced-motion:reduce){#beit-metodo .rv{opacity:1;transform:none;transition:none}}
+</style>
+<style>
+#beit-metodo .hero2{position:relative;padding:90px 0 40px}
+#beit-metodo .hero2::before{content:"";position:absolute;right:-10%;top:-200px;width:1000px;height:760px;background:radial-gradient(closest-side,rgba(10,132,255,.2),rgba(10,132,255,0));pointer-events:none}
+#beit-metodo .hero2 .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative}
+#beit-metodo .hero2 h1{margin:0;max-width:none;font-size:clamp(40px,5.6vw,68px)}
+#beit-metodo .hero2 .lead{margin:22px 0 0}
+#beit-metodo .hero2 .ctas{justify-content:flex-start}
+#beit-metodo .price-note s,#beit-metodo .plan s{color:var(--dim)}
+#beit-metodo .photo{border-radius:24px;overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/5;background:#0d3a66}
+#beit-metodo .photo img,#beit-metodo .photo2 img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+#beit-metodo .photo2{border-radius:22px;overflow:hidden;border:1px solid var(--line2);aspect-ratio:1;max-width:440px;background:#0d3a66}
+#beit-metodo .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px}
+#beit-metodo .trio>div{border-top:1px solid var(--line2);padding-top:18px}
+#beit-metodo .trio b{font-weight:600;font-size:17px}
+#beit-metodo .trio p{color:var(--muted);font-size:15px;margin-top:8px}
+#beit-metodo .pilares{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:50px}
+#beit-metodo .pil{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;transition:border-color .2s,transform .2s}
+#beit-metodo .pil:hover{border-color:var(--line2);transform:translateY(-2px)}
+#beit-metodo .pil span{font-size:13px;color:var(--blue);font-weight:500}
+#beit-metodo .pil h3{font-size:24px;font-weight:600;letter-spacing:-.02em;margin:10px 0 8px}
+#beit-metodo .pil p{color:var(--muted);font-size:15.5px}
+#beit-metodo .betbox{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:48px 56px;background:linear-gradient(135deg,#0f1620,#0d0e11 65%)}
+#beit-metodo .glyph{font-family:"Instrument Serif",serif;font-size:180px;line-height:1;color:#cfe3ff;width:180px;text-align:center}
+#beit-metodo .plan .val span{font-size:18px}
+@media (max-width:900px){
+  #beit-metodo .hero2 .wrap{grid-template-columns:1fr;gap:40px}
+  #beit-metodo .photo{max-width:420px;aspect-ratio:1}
+  #beit-metodo .trio,#beit-metodo .pilares{grid-template-columns:1fr}
+  #beit-metodo .betbox{grid-template-columns:1fr;gap:16px;padding:32px}
+  #beit-metodo .glyph{font-size:120px;width:auto;text-align:left}
+}
+</style>
+<div id="beit-metodo">
+  <header class="nav"><div class="wrap">
+    <a class="brand" href="#topo"><i><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/logo-beit.png" alt=""></i>Método Beit</a>
+    <nav class="links"><a href="#metodo">O método</a><a href="#pilares">Pilares</a><a href="#professor">Quem ensina</a><a href="#inscricao">Inscrição</a><a href="#perguntas">Perguntas</a></nav>
+    <a class="btn primary sm" href="https://pay.hotmart.com/D108246674K">Garantir vaga</a>
+  </div></header>
+
+  <div class="hero2" id="topo"><div class="wrap">
+    <div class="htext">
+      <div class="eyebrow rv"><b>Primeira turma</b> Lançamento em 16 de novembro</div>
+      <h1 class="rv">Design de verdade, <em>do fundamento ao cliente.</em></h1>
+      <p class="lead rv">O Método Beit é o curso que organiza mais de dez anos criando para artistas, ministérios e igrejas de todo o Brasil. Não é uma coleção de truques: é a formação completa de um designer que vive do próprio trabalho.</p>
+      <div class="ctas rv">
+        <a class="btn primary" href="https://pay.hotmart.com/D108246674K">Garantir minha vaga</a>
+        <a class="btn ghost" href="#pilares">Ver o conteúdo <svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+      <p class="price-note rv"><s>R$ 997</s> R$ 597 na primeira turma · inscrições até 16/12 · 7 dias de garantia</p>
+    </div>
+    <div class="photo rv"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt="Cazildo Barbosa, criador do Método Beit"></div>
+  </div></div>
+
+  <section class="block" id="metodo"><div class="wrap">
+    <div class="kicker rv">Por que um método</div>
+    <h2 class="rv">Saber usar o programa <em>não é ser designer.</em></h2>
+    <p class="sub rv">Tutorial ensina o botão. O mercado cobra o resto: entender por que uma peça funciona, se organizar como empresa, conversar com cliente e entregar projetos com consistência. O Método Beit junta essas partes na ordem certa.</p>
+    <div class="trio">
+      <div class="rv"><b>Base antes do efeito</b><p>Teoria, história e percepção visual, para você criar sabendo o que está fazendo.</p></div>
+      <div class="rv"><b>Negócio de verdade</b><p>CPF ou CNPJ, impostos, preço e negociação, sem improviso.</p></div>
+      <div class="rv"><b>Projetos reais</b><p>Trabalhos do dia a dia criados do zero no Photoshop, After Effects e Premiere.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block" id="pilares" style="padding-top:0"><div class="wrap">
+    <div class="kicker rv">O conteúdo</div>
+    <h2 class="rv">Quatro pilares. <em>Uma formação inteira.</em></h2>
+    <div class="pilares">
+      <div class="pil rv"><span>01</span><h3>Preparação</h3><p>A base que sustenta um bom design: teoria, história do design, Gestalt, cor, tipografia e composição.</p></div>
+      <div class="pil rv"><span>02</span><h3>Organização</h3><p>O lado que ninguém ensina: trabalhar como CPF ou CNPJ, abrir a empresa, impostos e a rotina de quem vive de design.</p></div>
+      <div class="pil rv"><span>03</span><h3>Captura</h3><p>Como conquistar e manter clientes: negociação, posicionamento, autoridade e comunicação que vende sem parecer venda.</p></div>
+      <div class="pil rv"><span>04</span><h3>Criação</h3><p>Projetos reais do começo ao fim no Photoshop, After Effects e Premiere, com o processo que uso no meu trabalho.</p></div>
+    </div>
+  </div></section>
+
+  <section class="block bet" style="padding-top:0"><div class="wrap">
+    <div class="betbox rv">
+      <div class="glyph" aria-hidden="true">ב</div>
+      <div>
+        <div class="kicker">O nome</div>
+        <h2>Beit, <em>casa.</em></h2>
+        <p class="sub">Quando o símbolo do Método ficou pronto, percebi nele a letra hebraica bet, ב, a primeira letra das Escrituras e a letra de "casa". Não foi planejado. Recebi como um sinal do que este curso quer ser: um lugar firme para construir a sua profissão.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="block" id="professor" style="padding-top:0"><div class="wrap feature">
+    <div class="photo2 rv"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt="Cazildo Barbosa" loading="lazy"></div>
+    <div>
+      <div class="kicker rv">Quem ensina</div>
+      <h2 class="rv">Cazildo Barbosa</h2>
+      <p class="sub rv">Designer gráfico há mais de dez anos. Acompanhei a mudança das redes desde antes do Instagram e construí a carreira atendendo artistas, ministérios e igrejas de todo o Brasil, sempre por indicação.</p>
+      <p class="sub rv">O Método Beit é o curso que eu gostaria de ter tido quando comecei: honesto, completo e sem atalhos que não se sustentam.</p>
+    </div>
+  </div></section>
+
+  <section class="block" id="inscricao" style="padding-top:0"><div class="wrap pricing">
+    <div>
+      <div class="kicker rv">Inscrição</div>
+      <h2 class="rv">Primeira turma <em>com valor de fundador.</em></h2>
+      <p class="sub rv">O Método Beit abre em 16 de novembro, e as inscrições da primeira turma ficam abertas até 16 de dezembro. Depois disso, o valor volta para R$ 997.</p>
+    </div>
+    <div class="plan rv">
+      <div class="tag">Método Beit · primeira turma</div>
+      <div class="val"><b>R$ 597</b><span><s>R$ 997</s></span></div>
+      <div class="small">Pagamento único na Hotmart · 7 dias de garantia</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Os quatro pilares completos</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Projetos reais no Photoshop, After e Premiere</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Material de apoio em cada aula</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Desafios práticos ao fim das aulas</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Acesso pela área de membros da Hotmart</li>
+      </ul>
+      <a class="btn primary" href="https://pay.hotmart.com/D108246674K">Garantir minha vaga</a>
+    </div>
+  </div></section>
+
+  <section class="block" id="perguntas" style="padding-top:0"><div class="wrap">
+    <div class="kicker rv">Perguntas</div>
+    <h2 class="rv">Antes de se inscrever</h2>
+    <div class="faq">
+      <details class="rv"><summary>Para quem é o Método Beit?</summary><p>Para quem quer viver de design gráfico com base sólida, seja começando agora ou já trabalhando e sentindo que falta estrutura. O conteúdo serve para qualquer nicho, e os exemplos vêm de anos de trabalho no mercado gospel.</p></details>
+      <details class="rv"><summary>Quando as aulas começam?</summary><p>O curso é lançado em 16 de novembro. Quem se inscreve antes recebe o acesso na área de membros da Hotmart assim que as aulas forem liberadas.</p></details>
+      <details class="rv"><summary>Onde eu assisto?</summary><p>Na área de membros da Hotmart, pelo computador ou pelo app da Hotmart no celular.</p></details>
+      <details class="rv"><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia. Se o curso não for para você, pede o reembolso direto na Hotmart e recebe o valor de volta.</p></details>
+      <details class="rv"><summary>O Beit Pass está incluído?</summary><p>Não. O Beit Pass é a assinatura das ferramentas do Beit Hub e é vendido à parte. O curso ensina o processo, e as ferramentas aceleram o trabalho.</p></details>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap">
+    <div>© 2026 Método Beit · Cazildo Barbosa</div>
+    <div><a href="/beit-hub/">Conheça o Beit Hub</a></div>
+  </div></footer>
+</div>
+<script>
+(function(){var els=document.querySelectorAll('#beit-metodo .rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+els.forEach(function(e,i){e.style.transitionDelay=(i%4)*60+'ms';io.observe(e)});})();
+</script>
