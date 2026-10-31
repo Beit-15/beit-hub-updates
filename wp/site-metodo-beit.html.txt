@@ -137,6 +137,16 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
 #beit-metodo .betbox{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:48px 56px;background:linear-gradient(135deg,#0f1620,#0d0e11 65%)}
 #beit-metodo .glyph{font-family:"Instrument Serif",serif;font-size:180px;line-height:1;color:#cfe3ff;width:180px;text-align:center}
 #beit-metodo .plan .val span{font-size:18px}
+#beit-metodo .artists{padding:56px 0 0}
+#beit-metodo .alabel{font-size:13.5px;color:var(--dim);text-align:center;margin-bottom:22px}
+#beit-metodo .marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+#beit-metodo .track{display:flex;width:max-content;animation:beitmq 48s linear infinite}
+#beit-metodo .marquee:hover .track{animation-play-state:paused}
+#beit-metodo .track span{font-size:clamp(20px,2.4vw,28px);font-weight:400;letter-spacing:-.02em;color:#d1d1d6;padding:0 30px;white-space:nowrap;position:relative}
+#beit-metodo .track span::after{content:"";position:absolute;right:-3px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--blue);opacity:.7}
+#beit-metodo .who{color:var(--muted);font-size:15px;margin-top:18px;max-width:620px;line-height:1.6}
+@keyframes beitmq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){#beit-metodo .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
 @media (max-width:900px){
   #beit-metodo .hero2 .wrap{grid-template-columns:1fr;gap:40px}
   #beit-metodo .photo{max-width:420px;aspect-ratio:1}
@@ -165,6 +175,12 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
     </div>
     <div class="photo rv"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt="Cazildo Barbosa, criador do Método Beit"></div>
   </div></div>
+
+  <section class="artists" aria-label="Artistas atendidos"><div class="wrap">
+    <div class="alabel rv">Artistas e ministérios que já confiaram no meu trabalho</div>
+  </div>
+    <div class="marquee rv"><div class="track"><span>Marcus Salles</span><span>Samuel Eleotério</span><span>Renan Lopes</span><span>Leonardo Sale</span><span>Valesca Mayssa</span><span>Kemilly Santos</span><span>Léo Santana</span><span>Rebeka Mariano</span><span>Ingrid Marianno</span><span>Attos 2 Worship</span><span>Get Church</span><span>Luã Freitas</span><span>Marcus Salles</span><span>Samuel Eleotério</span><span>Renan Lopes</span><span>Leonardo Sale</span><span>Valesca Mayssa</span><span>Kemilly Santos</span><span>Léo Santana</span><span>Rebeka Mariano</span><span>Ingrid Marianno</span><span>Attos 2 Worship</span><span>Get Church</span><span>Luã Freitas</span></div></div>
+  </section>
 
   <section class="block" id="metodo"><div class="wrap">
     <div class="kicker rv">Por que um método</div>
@@ -205,6 +221,7 @@ body:has(#beit-metodo){background:#0b0b0c;margin:0}
       <div class="kicker rv">Quem ensina</div>
       <h2 class="rv">Cazildo Barbosa</h2>
       <p class="sub rv">Designer gráfico há mais de dez anos. Acompanhei a mudança das redes desde antes do Instagram e construí a carreira atendendo artistas, ministérios e igrejas de todo o Brasil, sempre por indicação.</p>
+      <p class="who rv">Entre eles: Marcus Salles, Samuel Eleotério, Renan Lopes, Leonardo Sale, Valesca Mayssa, Kemilly Santos, Léo Santana, Rebeka Mariano, Ingrid Marianno, Attos 2 Worship, Get Church e Luã Freitas, entre outros.</p>
       <p class="sub rv">O Método Beit é o curso que eu gostaria de ter tido quando comecei: honesto, completo e sem atalhos que não se sustentam.</p>
     </div>
   </div></section>
