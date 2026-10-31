@@ -1,0 +1,483 @@
+<?php
+/**
+ * Plugin Name: Beit Licenças
+ * Description: Libera o Beit Hub (Beit Work, Beit Finance e Beit Pass) para quem assina na Hotmart. Recebe as notificações da Hotmart, envia o código de acesso por email e assina as licenças.
+ * Version: 1.2.0
+ * Author: Beit
+ * Requires PHP: 7.4
+ */
+
+if (!defined('ABSPATH')) exit;
+
+final class Beit_Licencas {
+    const VERSION   = '1.2.0';
+    const NS        = 'beit/v1';
+    const TOKEN_TTL = 7 * DAY_IN_SECONDS;   // licença vale offline por 7 dias
+    const CODE_TTL  = 15 * MINUTE_IN_SECONDS;
+    const KEYS      = ['work', 'finance', 'pass'];
+
+    public static function init() {
+        register_activation_hook(__FILE__, [__CLASS__, 'activate']);
+        add_action('rest_api_init', [__CLASS__, 'routes']);
+        add_action('admin_menu', [__CLASS__, 'menu']);
+        add_action('admin_post_beit_lic_save', [__CLASS__, 'save_settings']);
+        add_action('admin_post_beit_lic_grant', [__CLASS__, 'manual_grant']);
+        add_action('admin_post_beit_lic_revoke', [__CLASS__, 'manual_revoke']);
+        add_action('admin_post_beit_lic_devreset', [__CLASS__, 'device_reset']);
+        add_action('admin_post_beit_lic_learn', [__CLASS__, 'learn_hottok']);
+        add_action('plugins_loaded', [__CLASS__, 'maybe_upgrade']);
+    }
+
+    /* ---------------- instalação ---------------- */
+
+    public static function activate() {
+        self::create_tables();
+        if (!get_option('beit_lic_sk')) {
+            $kp = sodium_crypto_sign_keypair();
+            update_option('beit_lic_sk', base64_encode(sodium_crypto_sign_secretkey($kp)), false);
+            update_option('beit_lic_pk', base64_encode(sodium_crypto_sign_publickey($kp)), false);
+        }
+        add_option('beit_lic_products', ['8723035' => 'work', '8723058' => 'finance', '8835091' => 'pass']);
+        add_option('beit_lic_admins', get_option('admin_email'));
+        add_option('beit_lic_max_devices', 2);
+        add_option('beit_lic_checkout', ['work' => '', 'finance' => '', 'pass' => '']);
+        add_option('beit_lic_support', get_option('admin_email'));
+        if (!get_option('beit_lic_hottok')) update_option('beit_lic_learn_until', time() + 2 * HOUR_IN_SECONDS, false);
+        update_option('beit_lic_version', self::VERSION);
+    }
+
+    public static function maybe_upgrade() {
+        if (get_option('beit_lic_version') !== self::VERSION) {
+            // 1.2.0: Beit Pass passa a ser o produto 8835091 (assinatura R$ 49,90/mês) e ganha o link oficial de checkout.
+            $products = (array) get_option('beit_lic_products', []);
+            foreach ($products as $id => $k) if ($k === 'pass') unset($products[$id]);
+            $products['8835091'] = 'pass';
+            update_option('beit_lic_products', $products);
+            $checkout = (array) get_option('beit_lic_checkout', []);
+            $checkout['pass'] = 'https://pay.hotmart.com/A108246551Q?off=jq25f6ub';
+            $checkout['metodo'] = 'https://pay.hotmart.com/D108246674K';
+            update_option('beit_lic_checkout', $checkout);
+            self::activate();
+        }
+    }
+
+    private static function create_tables() {
+        global $wpdb;
+        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        $c = $wpdb->get_charset_collate();
+        dbDelta("CREATE TABLE {$wpdb->prefix}beit_lic (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            email VARCHAR(190) NOT NULL,
+            product VARCHAR(20) NOT NULL,
+            status VARCHAR(20) NOT NULL DEFAULT 'ativa',
+            active_until BIGINT NOT NULL DEFAULT 0,
+            source VARCHAR(20) NOT NULL DEFAULT 'hotmart',
+            last_event VARCHAR(60) NOT NULL DEFAULT '',
+            transaction_id VARCHAR(80) NOT NULL DEFAULT '',
+            updated_at DATETIME NOT NULL,
+            PRIMARY KEY  (id),
+            UNIQUE KEY email_product (email, product)
+        ) $c;");
+        dbDelta("CREATE TABLE {$wpdb->prefix}beit_dev (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            email VARCHAR(190) NOT NULL,
+            device VARCHAR(80) NOT NULL,
+            name VARCHAR(120) NOT NULL DEFAULT '',
+            last_seen DATETIME NOT NULL,
+            PRIMARY KEY  (id),
+            UNIQUE KEY email_device (email, device)
+        ) $c;");
+        dbDelta("CREATE TABLE {$wpdb->prefix}beit_log (
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+            created_at DATETIME NOT NULL,
+            event VARCHAR(60) NOT NULL,
+            email VARCHAR(190) NOT NULL DEFAULT '',
+            detail TEXT,
+            PRIMARY KEY  (id)
+        ) $c;");
+    }
+
+    /* ---------------- utilidades ---------------- */
+
+    private static function log($event, $email = '', $detail = '') {
+        global $wpdb;
+        $wpdb->insert("{$wpdb->prefix}beit_log", [
+            'created_at' => current_time('mysql', true), 'event' => $event,
+            'email' => $email, 'detail' => is_string($detail) ? $detail : wp_json_encode($detail),
+        ]);
+    }
+
+    private static function norm_email($e) { return strtolower(trim((string) $e)); }
+
+    private static function b64u($s) { return rtrim(strtr(base64_encode($s), '+/', '-_'), '='); }
+    private static function b64u_dec($s) { return base64_decode(strtr($s, '-_', '+/') . str_repeat('=', (4 - strlen($s) % 4) % 4)); }
+
+    private static function is_admin_email($email) {
+        $list = array_filter(array_map([__CLASS__, 'norm_email'], preg_split('/[\s,;]+/', (string) get_option('beit_lic_admins', ''))));
+        return in_array($email, $list, true);
+    }
+
+    /** Lista do que o email pode usar agora. */
+    public static function entitlements($email) {
+        global $wpdb;
+        if (self::is_admin_email($email)) return self::KEYS;
+        $rows = $wpdb->get_col($wpdb->prepare(
+            "SELECT product FROM {$wpdb->prefix}beit_lic WHERE email = %s AND active_until > %d",
+            $email, time()
+        ));
+        $ent = array_values(array_intersect(self::KEYS, $rows));
+        if (in_array('pass', $ent, true)) return self::KEYS;
+        return $ent;
+    }
+
+    private static function sign(array $payload) {
+        $sk  = base64_decode(get_option('beit_lic_sk'));
+        $msg = self::b64u(wp_json_encode($payload));
+        return $msg . '.' . self::b64u(sodium_crypto_sign_detached($msg, $sk));
+    }
+
+    private static function read_token($token) {
+        $parts = explode('.', (string) $token);
+        if (count($parts) !== 2) return null;
+        $pk = base64_decode(get_option('beit_lic_pk'));
+        $sig = self::b64u_dec($parts[1]);
+        if (strlen($sig) !== SODIUM_CRYPTO_SIGN_BYTES) return null;
+        if (!sodium_crypto_sign_verify_detached($sig, $parts[0], $pk)) return null;
+        $p = json_decode(self::b64u_dec($parts[0]), true);
+        return is_array($p) ? $p : null;
+    }
+
+    private static function issue($email, $device) {
+        $now = time();
+        $ent = self::entitlements($email);
+        $payload = ['e' => $email, 'ent' => $ent, 'd' => $device, 'iat' => $now, 'exp' => $now + self::TOKEN_TTL];
+        return ['ok' => true, 'token' => self::sign($payload), 'email' => $email, 'ent' => $ent, 'exp' => $payload['exp']];
+    }
+
+    private static function fail($msg, $code = 400) {
+        return new WP_REST_Response(['ok' => false, 'msg' => $msg], $code);
+    }
+
+    /* ---------------- rotas ---------------- */
+
+    public static function routes() {
+        $open = '__return_true';
+        register_rest_route(self::NS, '/hotmart', ['methods' => 'POST', 'callback' => [__CLASS__, 'webhook'], 'permission_callback' => $open]);
+        register_rest_route(self::NS, '/config',  ['methods' => 'GET',  'callback' => [__CLASS__, 'config'],  'permission_callback' => $open]);
+        register_rest_route(self::NS, '/code',    ['methods' => 'POST', 'callback' => [__CLASS__, 'send_code'], 'permission_callback' => $open]);
+        register_rest_route(self::NS, '/verify',  ['methods' => 'POST', 'callback' => [__CLASS__, 'verify'],  'permission_callback' => $open]);
+        register_rest_route(self::NS, '/refresh', ['methods' => 'POST', 'callback' => [__CLASS__, 'refresh'], 'permission_callback' => $open]);
+        register_rest_route(self::NS, '/logout',  ['methods' => 'POST', 'callback' => [__CLASS__, 'logout'],  'permission_callback' => $open]);
+    }
+
+    public static function config() {
+        return ['ok' => true, 'checkout' => get_option('beit_lic_checkout'), 'support' => get_option('beit_lic_support'), 'version' => self::VERSION];
+    }
+
+    /* Notificações da Hotmart (webhook 2.0) */
+    public static function webhook(WP_REST_Request $req) {
+        $body = $req->get_json_params();
+        if (!is_array($body)) $body = $req->get_body_params();
+        $hottok = $req->get_header('x_hotmart_hottok') ?: ($body['hottok'] ?? '');
+        $expected = (string) get_option('beit_lic_hottok', '');
+        // Sem hottok salvo: aprende o da primeira notificação da Hotmart, só dentro da janela liberada pelo admin.
+        if ($expected === '' && $hottok !== '' && time() < (int) get_option('beit_lic_learn_until', 0)) {
+            update_option('beit_lic_hottok', sanitize_text_field($hottok), false);
+            delete_option('beit_lic_learn_until');
+            $expected = (string) $hottok;
+            self::log('hottok_aprendido', '', 'hottok salvo a partir da notificação da Hotmart');
+        }
+        if ($expected === '' || !hash_equals($expected, (string) $hottok)) {
+            self::log('webhook_negado', '', 'hottok inválido');
+            return self::fail('hottok inválido', 401);
+        }
+        $event = strtoupper((string) ($body['event'] ?? ''));
+        $data  = $body['data'] ?? [];
+        $email = self::norm_email($data['buyer']['email'] ?? ($data['subscriber']['email'] ?? ''));
+        $pid   = (string) ($data['product']['id'] ?? '');
+        $map   = (array) get_option('beit_lic_products', []);
+        $key   = $map[$pid] ?? '';
+        $tx    = (string) ($data['purchase']['transaction'] ?? '');
+
+        if (!$email || !$key) {
+            self::log('webhook_ignorado', $email, ['event' => $event, 'product' => $pid]);
+            return ['ok' => true, 'ignored' => true];
+        }
+
+        global $wpdb;
+        $t = "{$wpdb->prefix}beit_lic";
+        $row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $t WHERE email = %s AND product = %s", $email, $key));
+        $until = $row ? (int) $row->active_until : 0;
+        $status = $row ? $row->status : 'ativa';
+        $now = time();
+
+        switch ($event) {
+            case 'PURCHASE_APPROVED':
+            case 'PURCHASE_COMPLETE':
+                $next = (int) ($data['purchase']['date_next_charge'] ?? 0);
+                $next = $next > 100000000000 ? intdiv($next, 1000) : $next; // a Hotmart manda em milissegundos
+                $until = max($until, $next > $now ? $next + 3 * DAY_IN_SECONDS : $now + 35 * DAY_IN_SECONDS);
+                $status = 'ativa';
+                break;
+            case 'SUBSCRIPTION_CANCELLATION':
+                $status = 'cancelada'; // mantém o acesso até o fim do período pago
+                break;
+            case 'PURCHASE_CANCELED':
+            case 'PURCHASE_REFUNDED':
+            case 'PURCHASE_CHARGEBACK':
+            case 'PURCHASE_EXPIRED':
+            case 'PURCHASE_PROTEST':
+                $status = strtolower(str_replace('PURCHASE_', '', $event));
+                $until = $now;
+                break;
+            default:
+                self::log('webhook_evento', $email, ['event' => $event, 'product' => $key]);
+                return ['ok' => true];
+        }
+
+        $wpdb->replace($t, [
+            'email' => $email, 'product' => $key, 'status' => $status, 'active_until' => $until,
+            'source' => 'hotmart', 'last_event' => $event, 'transaction_id' => $tx ?: ($row->transaction_id ?? ''),
+            'updated_at' => current_time('mysql', true),
+        ] + ($row ? ['id' => $row->id] : []));
+        self::log('webhook', $email, ['event' => $event, 'product' => $key, 'until' => gmdate('c', $until)]);
+        return ['ok' => true];
+    }
+
+    public static function send_code(WP_REST_Request $req) {
+        $email = self::norm_email($req->get_param('email'));
+        if (!is_email($email)) return self::fail('Digite um email válido.');
+        $ip = sanitize_text_field($_SERVER['REMOTE_ADDR'] ?? '');
+        foreach (['e' => $email, 'i' => $ip] as $k => $v) {
+            $rk = 'beit_rl_' . $k . md5($v);
+            $n = (int) get_transient($rk);
+            if ($n >= 5) return self::fail('Muitas tentativas. Espere alguns minutos e tente de novo.', 429);
+            set_transient($rk, $n + 1, HOUR_IN_SECONDS);
+        }
+        if (!self::entitlements($email)) {
+            self::log('codigo_sem_assinatura', $email);
+            return self::fail('Não encontramos assinatura ativa para este email. Use o mesmo email da compra na Hotmart.', 404);
+        }
+        $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        set_transient('beit_code_' . md5($email), ['h' => wp_hash_password($code), 'tries' => 0], self::CODE_TTL);
+
+        $html = '<div style="font-family:Segoe UI,Arial,sans-serif;background:#141414;color:#f3f3f1;padding:32px;border-radius:14px;max-width:460px">'
+              . '<p style="margin:0 0 6px;color:#9b9b96">Beit Hub</p>'
+              . '<h1 style="margin:0 0 18px;font-size:22px">Seu código de acesso</h1>'
+              . '<p style="font-size:34px;letter-spacing:8px;font-weight:700;color:#2B85F5;margin:0 0 18px">' . esc_html($code) . '</p>'
+              . '<p style="color:#9b9b96;margin:0">Digite este código no Beit Hub. Ele vale por 15 minutos. Se não foi você que pediu, pode ignorar este email.</p></div>';
+        $sent = wp_mail($email, "Seu código do Beit Hub: $code", $html, ['Content-Type: text/html; charset=UTF-8']);
+        self::log($sent ? 'codigo_enviado' : 'codigo_falhou', $email);
+        if (!$sent) return self::fail('Não consegui enviar o email agora. Tente de novo em instantes.', 500);
+        return ['ok' => true, 'msg' => 'Enviamos um código para ' . $email . '.'];
+    }
+
+    public static function verify(WP_REST_Request $req) {
+        global $wpdb;
+        $email  = self::norm_email($req->get_param('email'));
+        $code   = preg_replace('/\D/', '', (string) $req->get_param('code'));
+        $device = substr(preg_replace('/[^a-f0-9]/', '', strtolower((string) $req->get_param('device'))), 0, 64);
+        $name   = sanitize_text_field((string) $req->get_param('name'));
+        if (!$email || strlen($code) !== 6 || strlen($device) < 16) return self::fail('Dados incompletos.');
+
+        $key = 'beit_code_' . md5($email);
+        $c = get_transient($key);
+        if (!$c) return self::fail('O código expirou. Peça um novo.', 410);
+        if ($c['tries'] >= 5) { delete_transient($key); return self::fail('Muitas tentativas. Peça um novo código.', 429); }
+        if (!wp_check_password($code, $c['h'])) {
+            $c['tries']++; set_transient($key, $c, self::CODE_TTL);
+            return self::fail('Código incorreto. Confira o email e tente de novo.', 401);
+        }
+        delete_transient($key);
+
+        $t = "{$wpdb->prefix}beit_dev";
+        $known = $wpdb->get_var($wpdb->prepare("SELECT id FROM $t WHERE email = %s AND device = %s", $email, $device));
+        if (!$known && !self::is_admin_email($email)) {
+            $count = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE email = %s", $email));
+            $max = max(1, (int) get_option('beit_lic_max_devices', 2));
+            if ($count >= $max) {
+                self::log('limite_computadores', $email);
+                return self::fail("Esta assinatura já está ativa em $max computadores. Saia da conta em um deles pelo Beit Hub, ou fale com o suporte.", 409);
+            }
+        }
+        $wpdb->replace($t, ['email' => $email, 'device' => $device, 'name' => $name, 'last_seen' => current_time('mysql', true)] + ($known ? ['id' => $known] : []));
+        self::log('login', $email, $name);
+        return self::issue($email, $device);
+    }
+
+    public static function refresh(WP_REST_Request $req) {
+        global $wpdb;
+        $p = self::read_token($req->get_param('token'));
+        if (!$p) return self::fail('Licença inválida.', 401);
+        $t = "{$wpdb->prefix}beit_dev";
+        $id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $t WHERE email = %s AND device = %s", $p['e'], $p['d']));
+        if (!$id) return self::fail('Este computador saiu da conta. Entre de novo.', 401);
+        $wpdb->update($t, ['last_seen' => current_time('mysql', true)], ['id' => $id]);
+        return self::issue($p['e'], $p['d']);
+    }
+
+    public static function logout(WP_REST_Request $req) {
+        global $wpdb;
+        $p = self::read_token($req->get_param('token'));
+        if ($p) $wpdb->delete("{$wpdb->prefix}beit_dev", ['email' => $p['e'], 'device' => $p['d']]);
+        return ['ok' => true];
+    }
+
+    /* ---------------- painel do WordPress ---------------- */
+
+    public static function menu() {
+        add_management_page('Beit Licenças', 'Beit Licenças', 'manage_options', 'beit-licencas', [__CLASS__, 'page']);
+    }
+
+    private static function back($msg) {
+        wp_safe_redirect(add_query_arg(['page' => 'beit-licencas', 'beit_msg' => rawurlencode($msg)], admin_url('tools.php')));
+        exit;
+    }
+
+    public static function save_settings() {
+        if (!current_user_can('manage_options')) wp_die('Sem permissão');
+        check_admin_referer('beit_lic_save');
+        update_option('beit_lic_hottok', sanitize_text_field(wp_unslash($_POST['hottok'] ?? '')));
+        update_option('beit_lic_admins', sanitize_textarea_field(wp_unslash($_POST['admins'] ?? '')));
+        update_option('beit_lic_support', sanitize_email(wp_unslash($_POST['support'] ?? '')));
+        update_option('beit_lic_max_devices', max(1, (int) ($_POST['max_devices'] ?? 2)));
+        $products = []; $checkout = [];
+        foreach (self::KEYS as $k) {
+            $id = preg_replace('/\D/', '', (string) ($_POST["pid_$k"] ?? ''));
+            if ($id) $products[$id] = $k;
+            $checkout[$k] = esc_url_raw(wp_unslash($_POST["checkout_$k"] ?? ''));
+        }
+        update_option('beit_lic_products', $products);
+        update_option('beit_lic_checkout', $checkout);
+        self::back('Configurações salvas.');
+    }
+
+    public static function learn_hottok() {
+        if (!current_user_can('manage_options')) wp_die('Sem permissão');
+        check_admin_referer('beit_lic_learn');
+        update_option('beit_lic_hottok', '', false);
+        update_option('beit_lic_learn_until', time() + 2 * HOUR_IN_SECONDS, false);
+        self::back('Pronto. O próximo aviso da Hotmart nas próximas 2 horas define o hottok.');
+    }
+
+    public static function manual_grant() {
+        if (!current_user_can('manage_options')) wp_die('Sem permissão');
+        check_admin_referer('beit_lic_grant');
+        global $wpdb;
+        $email = self::norm_email(wp_unslash($_POST['email'] ?? ''));
+        $prod  = sanitize_key($_POST['product'] ?? '');
+        $days  = max(1, (int) ($_POST['days'] ?? 30));
+        if (!is_email($email) || !in_array($prod, self::KEYS, true)) self::back('Email ou produto inválido.');
+        $t = "{$wpdb->prefix}beit_lic";
+        $row = $wpdb->get_row($wpdb->prepare("SELECT id FROM $t WHERE email = %s AND product = %s", $email, $prod));
+        $wpdb->replace($t, ['email' => $email, 'product' => $prod, 'status' => 'ativa', 'active_until' => time() + $days * DAY_IN_SECONDS,
+            'source' => 'manual', 'last_event' => 'MANUAL', 'updated_at' => current_time('mysql', true)] + ($row ? ['id' => $row->id] : []));
+        self::log('manual', $email, "$prod $days dias");
+        self::back("Acesso liberado para $email.");
+    }
+
+    public static function manual_revoke() {
+        if (!current_user_can('manage_options')) wp_die('Sem permissão');
+        check_admin_referer('beit_lic_revoke');
+        global $wpdb;
+        $wpdb->update("{$wpdb->prefix}beit_lic", ['active_until' => time(), 'status' => 'removida', 'updated_at' => current_time('mysql', true)], ['id' => (int) ($_POST['id'] ?? 0)]);
+        self::back('Acesso removido.');
+    }
+
+    public static function device_reset() {
+        if (!current_user_can('manage_options')) wp_die('Sem permissão');
+        check_admin_referer('beit_lic_devreset');
+        global $wpdb;
+        $email = self::norm_email(wp_unslash($_POST['email'] ?? ''));
+        $wpdb->delete("{$wpdb->prefix}beit_dev", ['email' => $email]);
+        self::back("Computadores de $email liberados.");
+    }
+
+    public static function page() {
+        if (!current_user_can('manage_options')) return;
+        global $wpdb;
+        $names = ['work' => 'Beit Work', 'finance' => 'Beit Finance', 'pass' => 'Beit Pass'];
+        $pids = array_flip((array) get_option('beit_lic_products', []));
+        $checkout = (array) get_option('beit_lic_checkout', []);
+        $lics = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}beit_lic ORDER BY updated_at DESC LIMIT 300");
+        $devs = $wpdb->get_results("SELECT email, COUNT(*) n, MAX(last_seen) seen FROM {$wpdb->prefix}beit_dev GROUP BY email");
+        $devmap = []; foreach ($devs as $d) $devmap[$d->email] = $d;
+        $logs = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}beit_log ORDER BY id DESC LIMIT 30");
+        $msg = isset($_GET['beit_msg']) ? sanitize_text_field(wp_unslash($_GET['beit_msg'])) : '';
+        ?>
+        <div class="wrap">
+            <h1>Beit Licenças</h1>
+            <?php if ($msg): ?><div class="notice notice-success"><p><?php echo esc_html($msg); ?></p></div><?php endif; ?>
+
+            <h2>Ligação com a Hotmart</h2>
+            <table class="form-table">
+                <tr><th>URL do webhook</th><td><code id="beit-webhook-url"><?php echo esc_html(rest_url(self::NS . '/hotmart')); ?></code><p class="description">Cole esta URL na Hotmart em Ferramentas &rsaquo; Webhook (versão 2.0).</p></td></tr>
+                <tr><th>Chave pública</th><td><code id="beit-public-key"><?php echo esc_html(get_option('beit_lic_pk')); ?></code><p class="description">Usada pelo Beit Hub para conferir que a licença veio deste site.</p></td></tr>
+            </table>
+
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                <input type="hidden" name="action" value="beit_lic_save"><?php wp_nonce_field('beit_lic_save'); ?>
+                <table class="form-table">
+                    <tr><th><label for="hottok">Hottok da Hotmart</label></th><td><input name="hottok" id="hottok" type="password" class="regular-text" value="<?php echo esc_attr(get_option('beit_lic_hottok')); ?>">
+                        <p class="description" id="beit-hottok-status"><?php
+                        if (get_option('beit_lic_hottok')) echo 'Hottok configurado.';
+                        elseif (time() < (int) get_option('beit_lic_learn_until', 0)) echo 'Aguardando o primeiro aviso da Hotmart para salvar o hottok sozinho (até ' . esc_html(wp_date('H:i', (int) get_option('beit_lic_learn_until'))) . ').';
+                        else echo 'Sem hottok. Cole aqui o hottok da Hotmart ou use o botão abaixo.';
+                        ?></p></td></tr>
+                    <?php foreach ($names as $k => $n): ?>
+                    <tr><th><?php echo esc_html($n); ?></th><td>
+                        ID na Hotmart <input name="pid_<?php echo $k; ?>" value="<?php echo esc_attr($pids[$k] ?? ''); ?>" size="10">
+                        &nbsp; Link do checkout <input name="checkout_<?php echo $k; ?>" value="<?php echo esc_attr($checkout[$k] ?? ''); ?>" class="regular-text">
+                    </td></tr>
+                    <?php endforeach; ?>
+                    <tr><th><label for="admins">Acesso total (emails)</label></th><td><textarea name="admins" id="admins" rows="2" class="large-text"><?php echo esc_textarea(get_option('beit_lic_admins')); ?></textarea><p class="description">Emails que usam tudo sem assinatura, como o seu. Um por linha.</p></td></tr>
+                    <tr><th><label for="support">Email de suporte</label></th><td><input name="support" id="support" class="regular-text" value="<?php echo esc_attr(get_option('beit_lic_support')); ?>"></td></tr>
+                    <tr><th><label for="max_devices">Computadores por assinatura</label></th><td><input type="number" min="1" name="max_devices" id="max_devices" value="<?php echo (int) get_option('beit_lic_max_devices', 2); ?>" style="width:70px"></td></tr>
+                </table>
+                <?php submit_button('Salvar configurações'); ?>
+            </form>
+
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin:-10px 0 20px">
+                <input type="hidden" name="action" value="beit_lic_learn"><?php wp_nonce_field('beit_lic_learn'); ?>
+                <?php submit_button('Pegar o hottok no próximo aviso da Hotmart', 'secondary', 'submit', false); ?>
+            </form>
+
+            <h2>Liberar acesso manualmente</h2>
+            <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                <input type="hidden" name="action" value="beit_lic_grant"><?php wp_nonce_field('beit_lic_grant'); ?>
+                <input name="email" type="email" placeholder="email do cliente" class="regular-text" required>
+                <select name="product"><?php foreach ($names as $k => $n) echo '<option value="' . $k . '">' . esc_html($n) . '</option>'; ?></select>
+                por <input type="number" name="days" value="30" min="1" style="width:70px"> dias
+                <?php submit_button('Liberar', 'secondary', 'submit', false); ?>
+            </form>
+
+            <h2>Assinantes</h2>
+            <table class="widefat striped">
+                <thead><tr><th>Email</th><th>Produto</th><th>Situação</th><th>Acesso até</th><th>Origem</th><th>Computadores</th><th></th></tr></thead>
+                <tbody>
+                <?php if (!$lics) echo '<tr><td colspan="7">Nenhum assinante ainda.</td></tr>'; ?>
+                <?php foreach ($lics as $l): $on = $l->active_until > time(); $d = $devmap[$l->email] ?? null; ?>
+                    <tr>
+                        <td><?php echo esc_html($l->email); ?></td>
+                        <td><?php echo esc_html($names[$l->product] ?? $l->product); ?></td>
+                        <td><?php echo $on ? '<strong style="color:#2e7d32">Ativa</strong>' : 'Inativa'; ?> <span class="description">(<?php echo esc_html($l->status); ?>)</span></td>
+                        <td><?php echo esc_html(wp_date('d/m/Y H:i', (int) $l->active_until)); ?></td>
+                        <td><?php echo esc_html($l->source); ?></td>
+                        <td><?php echo $d ? (int) $d->n : 0; ?>
+                            <?php if ($d): ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="display:inline"><input type="hidden" name="action" value="beit_lic_devreset"><input type="hidden" name="email" value="<?php echo esc_attr($l->email); ?>"><?php wp_nonce_field('beit_lic_devreset'); ?><button class="button-link">liberar</button></form><?php endif; ?></td>
+                        <td><?php if ($on): ?><form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>"><input type="hidden" name="action" value="beit_lic_revoke"><input type="hidden" name="id" value="<?php echo (int) $l->id; ?>"><?php wp_nonce_field('beit_lic_revoke'); ?><button class="button-link-delete button-link">remover</button></form><?php endif; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+
+            <h2>Últimos eventos</h2>
+            <table class="widefat striped"><thead><tr><th>Quando (UTC)</th><th>Evento</th><th>Email</th><th>Detalhe</th></tr></thead><tbody>
+            <?php foreach ($logs as $g): ?><tr><td><?php echo esc_html($g->created_at); ?></td><td><?php echo esc_html($g->event); ?></td><td><?php echo esc_html($g->email); ?></td><td><code><?php echo esc_html($g->detail); ?></code></td></tr><?php endforeach; ?>
+            </tbody></table>
+        </div>
+        <?php
+    }
+}
+
+Beit_Licencas::init();
