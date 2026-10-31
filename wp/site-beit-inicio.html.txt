@@ -57,7 +57,7 @@ body:has(#beit-inicio){background:#0b0b0c;margin:0}
     <a class="door hub rv d2" href="/beit-hub/">
       <div class="bg"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app.jpg" alt=""></div>
       <div class="txt">
-        <div class="kick">Assinatura · R$ 49,90/mês</div>
+        <div class="kick">Assinatura · R$ 49,90/mês · Windows (Mac em breve)</div>
         <h2>Beit Hub</h2>
         <p>Plugins para After Effects, Premiere e Photoshop, áudio e câmera para o OBS e apps para o dia a dia. Tudo num lugar só.</p>
         <span class="go">Conhecer o Beit Hub <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
