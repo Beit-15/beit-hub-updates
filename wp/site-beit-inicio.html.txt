@@ -1,0 +1,77 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body:has(#beit-inicio){background:#0b0b0c;margin:0}
+#beit-inicio{--line:#232326;--line2:#2e2e32;--text:#f5f5f7;--muted:#a1a1a6;--dim:#6e6e73;--blue:#0A84FF;
+  background:#0b0b0c;color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;
+  min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+#beit-inicio *{box-sizing:border-box;margin:0;padding:0}
+#beit-inicio a{color:inherit;text-decoration:none}
+#beit-inicio::before{content:"";position:absolute;left:50%;top:-260px;width:1200px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(10,132,255,.16),rgba(10,132,255,0));pointer-events:none}
+#beit-inicio .top{display:flex;align-items:center;justify-content:center;gap:10px;padding:34px 24px 0;font-weight:600;font-size:16px;position:relative}
+#beit-inicio .top i{width:30px;height:30px;border-radius:8px;background:#151517;border:1px solid var(--line2);display:grid;place-items:center}
+#beit-inicio .top img{height:17px}
+#beit-inicio .head{text-align:center;padding:56px 24px 0;position:relative}
+#beit-inicio h1{font-size:clamp(34px,5vw,60px);line-height:1.05;font-weight:600;letter-spacing:-.035em}
+#beit-inicio h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:#cfe3ff}
+#beit-inicio .head p{color:var(--muted);font-size:clamp(16px,1.8vw,19px);margin-top:16px}
+#beit-inicio .doors{flex:1;display:flex;gap:16px;max-width:1240px;width:100%;margin:48px auto 0;padding:0 24px;min-height:520px;position:relative}
+#beit-inicio .door{position:relative;flex:1;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#111113;display:flex;flex-direction:column;justify-content:flex-end;
+  transition:flex .7s cubic-bezier(.2,.8,.2,1),border-color .3s;isolation:isolate}
+#beit-inicio .door:hover{flex:1.25;border-color:#3a3a40}
+#beit-inicio .door .bg{position:absolute;inset:0;z-index:-1}
+#beit-inicio .door .bg img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity .4s;opacity:.75}
+#beit-inicio .door:hover .bg img{transform:scale(1.04);opacity:.9}
+#beit-inicio .door .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,12,0) 8%,rgba(11,11,12,.86) 46%,#0b0b0c 70%)}
+#beit-inicio .hub .bg img{object-position:0% 0%;width:150%;max-width:none;height:auto;opacity:.6}
+#beit-inicio .door:hover .hub .bg img{opacity:.75}
+#beit-inicio .met .bg img{object-position:50% 25%}
+#beit-inicio .txt{padding:36px}
+#beit-inicio .kick{font-size:13.5px;color:var(--blue);font-weight:500}
+#beit-inicio h2{font-size:clamp(30px,3.4vw,44px);font-weight:600;letter-spacing:-.03em;margin-top:8px}
+#beit-inicio .txt p{color:#c7c7cc;font-size:16px;line-height:1.55;margin-top:10px;max-width:440px}
+#beit-inicio .go{display:inline-flex;align-items:center;gap:10px;margin-top:24px;height:46px;padding:0 22px;border-radius:12px;font-weight:500;font-size:15px;background:var(--blue);color:#fff;transition:background .2s,gap .3s}
+#beit-inicio .met .go{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#beit-inicio .door:hover .go{gap:16px}
+#beit-inicio .go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#beit-inicio .foot{text-align:center;color:var(--dim);font-size:13px;padding:36px 24px 40px}
+#beit-inicio .rv{opacity:0;transform:translateY(16px);animation:beitin .9s cubic-bezier(.2,.8,.2,1) forwards}
+#beit-inicio .d1{animation-delay:.08s}#beit-inicio .d2{animation-delay:.18s}#beit-inicio .d3{animation-delay:.28s}
+@keyframes beitin{to{opacity:1;transform:none}}
+@media (max-width:820px){
+  #beit-inicio .doors{flex-direction:column;min-height:0}
+  #beit-inicio .door{min-height:440px}
+  #beit-inicio .door:hover{flex:1}
+  #beit-inicio .txt{padding:26px}
+  #beit-inicio .head{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){#beit-inicio .rv{animation:none;opacity:1;transform:none}#beit-inicio .door{transition:none}}
+</style>
+<div id="beit-inicio">
+  <div class="top rv"><i><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/logo-beit.png" alt=""></i>Beit</div>
+  <div class="head">
+    <h1 class="rv d1">Ferramentas e formação <em>para designers.</em></h1>
+    <p class="rv d2">Escolha por onde começar.</p>
+  </div>
+  <div class="doors">
+    <a class="door hub rv d2" href="/beit-hub/">
+      <div class="bg"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app.jpg" alt=""></div>
+      <div class="txt">
+        <div class="kick">Assinatura · R$ 49,90/mês</div>
+        <h2>Beit Hub</h2>
+        <p>Plugins para After Effects, Premiere e Photoshop, áudio e câmera para o OBS e apps para o dia a dia. Tudo num lugar só.</p>
+        <span class="go">Conhecer o Beit Hub <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+    <a class="door met rv d3" href="/metodo-beit/">
+      <div class="bg"><img src="https://cazildobarbosa.com/wp-content/uploads/2026/08/Foto-Perfil.png" alt=""></div>
+      <div class="txt">
+        <div class="kick">Curso · primeira turma</div>
+        <h2>Método Beit</h2>
+        <p>A formação completa do designer: fundamento, negócio, clientes e projetos reais, com mais de dez anos de mercado.</p>
+        <span class="go">Conhecer o Método Beit <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+  </div>
+  <div class="foot">© 2026 Beit · Feito de designer para designer.</div>
+</div>
