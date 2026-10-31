@@ -1,6 +1,6 @@
 {
-  "version": "2.4.2",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.4.2.exe",
-  "sha256": "92bcd41a373a3a2c06d092af5a57f010627d9b7b0787822c92bfb10cd6b5ae1c",
-  "notes": "Preço do Beit Pass atualizado para R$ 49,90/mês."
+  "version": "2.5.0",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.0.exe",
+  "sha256": "972c1a83a3702d4acd35327b469f33d477220d526d6931031b3c00ceb1e146df",
+  "notes": "Fotos e referências nos pedidos do Beit Work (arrastar, colar ou adicionar), abertas no Photoshop pelo Beit Hub Pedido; botão Zerar horas sempre visível; lista das 38 fontes do Beit Fontes dentro do Hub."
 }
