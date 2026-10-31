@@ -3,7 +3,8 @@
 <style>
 #beit-site{--bg:#0b0b0c;--bg2:#111113;--card:#161618;--line:#232326;--line2:#2e2e32;--text:#f5f5f7;--muted:#a1a1a6;--dim:#6e6e73;--blue:#0A84FF;
   background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;
-  margin:0 calc(50% - 50vw);width:100vw;overflow:hidden}
+  margin:0;width:100%;overflow:hidden}
+body:has(#beit-site){background:#0b0b0c;margin:0}
 #beit-site *{box-sizing:border-box;margin:0;padding:0}
 #beit-site a{color:inherit;text-decoration:none}
 #beit-site img{display:block;max-width:100%}
