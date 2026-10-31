@@ -1,6 +1,6 @@
 {
-  "version": "2.3.0",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.3.0.exe",
-  "sha256": "0d15f5716529e48169308487bec5b23e84d606a027fd79888838a5bd48912079",
-  "notes": "Cut: legendas redesenhadas · Motion: flicker de cor, luz com repetições e pastas organizadas"
+  "version": "2.4.0",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.4.0.exe",
+  "sha256": "c5c16b8c31ee2045cd41113d160f6aedf23852dc24d3b118a31b3a4404a09bc7",
+  "notes": "Cut: reenquadrar para redes e estilos novos em texto editável · Photo: a arte em todos os formatos de rede"
 }
