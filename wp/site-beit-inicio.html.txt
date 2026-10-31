@@ -55,7 +55,7 @@ body:has(#beit-inicio){background:#0b0b0c;margin:0}
   </div>
   <div class="doors">
     <a class="door hub rv d2" href="/beit-hub/">
-      <div class="bg"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app.jpg" alt=""></div>
+      <div class="bg"><img src="https://cdn.jsdelivr.net/gh/Beit-15/beit-hub-updates@main/site/hub-app-12.jpg" alt=""></div>
       <div class="txt">
         <div class="kick">Assinatura · R$ 49,90/mês · Windows (Mac em breve)</div>
         <h2>Beit Hub</h2>
