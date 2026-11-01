@@ -1,6 +1,6 @@
 {
-  "version": "2.5.1",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.1.exe",
-  "sha256": "6330e6d711f14e6ad9ac2cb50c22328b26b51961a04c82d68571e8fa434abccf",
-  "notes": "Beit Work: cole a agenda do cliente (em lista ou em blocos) e o Work separa data, evento, igreja, bairro e cidade, com prévia para conferir."
+  "version": "2.5.2",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.2.exe",
+  "sha256": "49d10dcf1a4d2af28e25f6cf88a055becf66a98063afd7a0d205b3e240748ae6",
+  "notes": "Beit Hub Cut 4.3: títulos animados com presets prontos e edição direto no painel (fonte, animação, caixa, destaque). Atualização mais confiável."
 }
