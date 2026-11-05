@@ -1,6 +1,6 @@
 {
-  "version": "2.5.3",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.3.exe",
-  "sha256": "e56d69f7a1213b847b944fe5160bbc066f44fd5bac5fc5eec718c33b06ae3223",
-  "notes": "Photo 3.5: sai Formatos para redes; entram 12 novos tratamentos (contraluz, luz de igreja, celular, pele de estúdio, pastel, retrô...) e 8 finalizações (Culto e palco, Noite neon, Retrato premium, Pôr do sol...). Cut: remover um efeito não deixa mais o desfoque preso. Motion: sai a paralaxe de texto."
+  "version": "2.5.4",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.4.exe",
+  "sha256": "79ff4d33a8eda7a38fb39e0f9d7595d6b86e141719fe5b5372ac37898fa36445",
+  "notes": "Photo 3.5.1: as categorias de Gradientes abrem e fecham com um clique (e o botão Recolher tudo)."
 }
