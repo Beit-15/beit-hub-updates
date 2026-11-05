@@ -1,6 +1,6 @@
 {
-  "version": "2.5.4",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.4.exe",
-  "sha256": "79ff4d33a8eda7a38fb39e0f9d7595d6b86e141719fe5b5372ac37898fa36445",
-  "notes": "Photo 3.5.1: as categorias de Gradientes abrem e fecham com um clique (e o botão Recolher tudo)."
+  "version": "2.5.5",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.5.exe",
+  "sha256": "0c2a8ae623f62e05999c4f1ef600c20682a34deef8d456c10f678c9e1d413eab",
+  "notes": "Photo 3.6: finalizações refeitas do zero, leves e limpas, todas na mesma estrutura: Filtro de cor, Curvas, Exposição, Pesquisa de cores e Granulação."
 }
