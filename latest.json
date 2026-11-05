@@ -1,6 +1,6 @@
 {
-  "version": "2.5.5",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.5.5.exe",
-  "sha256": "0c2a8ae623f62e05999c4f1ef600c20682a34deef8d456c10f678c9e1d413eab",
-  "notes": "Photo 3.6: finalizações refeitas do zero, leves e limpas, todas na mesma estrutura: Filtro de cor, Curvas, Exposição, Pesquisa de cores e Granulação."
+  "version": "2.6.0",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.6.0.exe",
+  "sha256": "70b58b7d8a23ce5d63c4a1930f436ea141ea4136206fd84b8324011fb87cb448",
+  "notes": "Novo: Palavra do dia. Todo dia à meia-noite chega um versículo com uma palavra de ânimo, e ela também aparece no topo do Beit Hub. Quem não quiser receber desliga com um clique."
 }
