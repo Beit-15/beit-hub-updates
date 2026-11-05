@@ -1,6 +1,6 @@
 {
-  "version": "2.6.1",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.6.1.exe",
-  "sha256": "e0513eced74b090f38eeeb611db04f9879ee530f876f717e6d662bb36656c1c6",
-  "notes": "Cut 4.3.2: a nova sequência criada a partir da seleção abre limpa, sem região de entrada e saída."
+  "version": "2.7.0",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.7.0.exe",
+  "sha256": "bb41b72a5d9d09ac123a3ffefbe6e4ebe0768e415fd510134bccfe7ef544e924",
+  "notes": "Novo: Efeitos em vídeo no Motion e no Cut. São 84 light leaks, flares, bokeh, filme, chuva, glitch e fundos com prévia animada; um clique coloca no cursor, cobrindo o quadro e em modo Tela."
 }
