@@ -1,6 +1,6 @@
 {
-  "version": "2.6.0",
-  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.6.0.exe",
-  "sha256": "70b58b7d8a23ce5d63c4a1930f436ea141ea4136206fd84b8324011fb87cb448",
-  "notes": "Novo: Palavra do dia. Todo dia à meia-noite chega um versículo com uma palavra de ânimo, e ela também aparece no topo do Beit Hub. Quem não quiser receber desliga com um clique."
+  "version": "2.6.1",
+  "url": "https://raw.githubusercontent.com/Beit-15/beit-hub-updates/main/releases/BeitHub-2.6.1.exe",
+  "sha256": "e0513eced74b090f38eeeb611db04f9879ee530f876f717e6d662bb36656c1c6",
+  "notes": "Cut 4.3.2: a nova sequência criada a partir da seleção abre limpa, sem região de entrada e saída."
 }
